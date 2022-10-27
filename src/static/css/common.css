@@ -1,0 +1,220 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* COMMON */
+/* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
+.aPosi {
+  position: absolute;
+}
+.rPosi {
+  position: relative;
+}
+.z10 {
+  z-index: 10;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.dNone {
+  display: none;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.bgNone,
+.bgNone:disabled {
+  background: none;
+  border: none;
+}
+
+/* LINK */
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+/* TEXT */
+/* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
+
+.semi{
+  font-weight: 600;
+}
+
+.medi,
+.medi13 {
+  font-weight: 500;
+}
+
+.medi14,
+.medi12,
+.regu14 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.regu14,
+.regu,
+.regu13,
+.regu12 {
+  font-weight: 400;
+}
+
+.medi12,
+.regu12 {
+  font-size: 12px;
+}
+
+.regu13,
+.medi13 {
+  font-size: 13px;
+}
+
+/* TEXT TRANSFORM */
+/* upper, caps */
+
+.upper {
+  text-transform: uppercase;
+}
+
+.caps {
+  text-transform: capitalize;
+}
+
+/* FLEX */
+/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, */
+.f1 {
+  flex: 1;
+}
+
+.fcfs,
+.fcfssb,
+.frc,
+.fcc,
+.frcsb,
+.fccsb,
+.frcsa,
+.frfs,
+.fcfe {
+  display: flex;
+}
+
+.frc,
+.fcc,
+.frcsb,
+.fccsb,
+.frcsa,
+.frfs {
+  flex-direction: row;
+  align-items: center;
+}
+
+.frfs {
+  align-items: flex-start;
+}
+
+.fcfe {
+  align-items: flex-end;
+}
+
+.fcc,
+.fccsb,
+.fcfs,
+.fcfssb,
+.fcfe {
+  flex-direction: column;
+}
+
+.fcfs,
+.fcfssb {
+  align-items: flex-start;
+}
+
+.frcsb,
+.fccsb,
+.fcfssb {
+  justify-content: space-between;
+}
+
+.frcsa {
+  justify-content: space-around;
+}
+
+.gcc,
+button {
+  display: grid;
+  align-items: center;
+  /* justify-content: center; */
+  justify-items: center;
+}
+
+/* MARGIN */
+/* mr30, mr20, mr5, mb20, mb15, mv20, mh10, mt30, mt40, mt15, mt5, ml15, ml30 */
+
+.mr30 {
+  margin-right: 30px;
+}
+.mr20 {
+  margin-right: 20px;
+}
+.mr5 {
+  margin-right: 5px;
+}
+/* bottom */
+.mb20 {
+  margin-bottom: 20px;
+}
+.mb15 {
+  margin-bottom: 20px;
+}
+/* vertical */
+.mv20 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+/* horizontal */
+.mh10 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+/* top */
+.mt30 {
+  margin-top: 30px;
+}
+.mt40 {
+  margin-top: 40px;
+}
+.mt15 {
+  margin-top: 15px;
+}
+.mt5 {
+  margin-top: 5px;
+}
+
+/* left */
+.ml15 {
+  margin-left: 15px;
+}
+.ml30 {
+  margin-left: 30px;
+}
+
+/* PADDING */
+/* p30 */
+.p30 {
+  padding: 30px;
+}

@@ -1,0 +1,79 @@
+/* FONTS */
+/* poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,500&display=swap");
+/* inter */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+
+h2,
+.semi16,
+.semi14 {
+  font-family: "Poppins", sans-serif;
+}
+.regu10,
+.regu11,
+.regu12,
+.regu13,
+.regu14,
+.medi12 {
+  font-family: "Inter", sans-serif;
+}
+
+/* VARIABLES */
+:root {
+  --heading: #151515;
+  --para: #333333;
+  --lightText: #555555;
+  --notSelect: rgba(51, 51, 51, 0.6);
+  --srmBlue: #0060af;
+  --lightBlue: #52bad7;
+  --red: #ba3b36;
+  --border: #e0e0e0;
+  --darkBg: #eaeaea;
+  --bg: #f0f0f0;
+  --lightBg: #fafafa;
+}
+
+/* TEXT */
+.regu10,
+.regu11,
+.regu12,
+.regu13,
+.regu14 {
+  font-weight: 400;
+}
+
+.medi12,
+h2 {
+  font-weight: 500;
+}
+
+.semi14,
+.semi16 {
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+.regu10 {
+  font-size: 10px;
+}
+.regu11 {
+  font-size: 11px;
+}
+.regu12,
+.medi12 {
+  font-size: 12px;
+}
+.regu13 {
+  font-size: 13px;
+}
+.regu14,
+.semi14 {
+  font-size: 14px;
+}
+.regu16,
+.semi16 {
+  font-size: 16px;
+}
