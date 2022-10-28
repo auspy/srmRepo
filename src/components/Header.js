@@ -1,19 +1,18 @@
 import IconProfile from "../static/icons/IconProfile";
 import IconSearch from "../static/icons/IconSearch";
 
-const menuItems = [
-  { name: "Latest Updates", href: "/" },
-  { name: "Ranking", href: "/" },
-  { name: "Contact Us", href: "/" },
-  { name: "About SRM", href: "/" },
-  { name: "Visit SRM Website", href: "/" },
-];
-const icons = [<IconProfile />, <IconSearch />];
-
 const Header = () => {
   return (
     <>
-      <div className="frcsb pv10">
+      <div
+      id="header"
+        className="frcsb pv10 bgLightBg"
+        style={{
+          marginBottom: 40,
+          marginLeft: "7.5%",
+          marginRight: "7.15%",
+        }}
+      >
         {/* logo */}
         <img
           src={require("../static/images/logo.png")}
@@ -36,6 +35,7 @@ const Header = () => {
         <div className="frc">
           {icons?.map((item, i) => (
             <button
+              key={item + i}
               className={`bgNone ${i === icons.length - 1 && "ml30 frc"}`}
             >
               {item}
@@ -48,3 +48,12 @@ const Header = () => {
 };
 
 export default Header;
+
+const menuItems = [
+  { name: "Latest Updates", href: "/" },
+  { name: "Ranking", href: "/" },
+  { name: "Contact Us", href: "/" },
+  { name: "About SRM", href: "/" },
+  { name: "Visit SRM Website", href: "/" },
+];
+const icons = [<IconSearch />, <IconProfile />];

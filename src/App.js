@@ -2,13 +2,16 @@ import "./static/css/common.css";
 import "./static/css/App.css";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
+import Home from "./screens/Home";
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <SubHeader />
-    </div>
+      {/* SCREENS */}
+      <Home />
+    </>
   );
 }
 

@@ -34,7 +34,8 @@
   border: none;
 }
 
-button:hover:enabled,input[type=button]:hover:enabled {
+button:hover:enabled,
+input[type="button"]:hover:enabled {
   opacity: 0.7;
   cursor: pointer;
 }
@@ -56,7 +57,7 @@ a:hover {
 /* TEXT */
 /* semi, regu, medi, medi12, medi14, regu14, regu13, regu12 */
 
-.semi{
+.semi {
   font-weight: 600;
 }
 
@@ -101,7 +102,7 @@ a:hover {
 }
 
 /* FLEX */
-/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, */
+/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, */
 .f1 {
   flex: 1;
 }
@@ -114,7 +115,8 @@ a:hover {
 .fccsb,
 .frcsa,
 .frfs,
-.fcfe {
+.fcfe,
+.frcc {
   display: flex;
 }
 
@@ -123,7 +125,8 @@ a:hover {
 .frcsb,
 .fccsb,
 .frcsa,
-.frfs {
+.frfs,
+.frcc {
   flex-direction: row;
   align-items: center;
 }
@@ -159,6 +162,10 @@ a:hover {
   justify-content: space-around;
 }
 
+.frcc{
+  justify-content: center;
+}
+
 .gcc,
 button {
   display: grid;
@@ -168,7 +175,7 @@ button {
 }
 
 /* MARGIN */
-/* mr30, mr20, mr5, mb20, mb15, mv20, mh10, mt30, mt40, mt15, mt5, ml15, ml30 */
+/* mr30, mr20, mr5, mb20, mb15, mv10,mv20, mh10, mt30, mt40, mt15, mt5, ml15, ml30 */
 
 .mr30 {
   margin-right: 30px;
@@ -184,12 +191,19 @@ button {
   margin-bottom: 20px;
 }
 .mb15 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+}
+.mb5 {
+  margin-bottom: 5px;
 }
 /* vertical */
 .mv20 {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+.mv10 {
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 /* horizontal */
 .mh10 {
@@ -214,6 +228,9 @@ button {
 .ml15 {
   margin-left: 15px;
 }
+.ml5 {
+  margin-left: 5px;
+}
 .ml30 {
   margin-left: 30px;
 }
@@ -224,7 +241,7 @@ button {
   padding: 30px;
 }
 
-.pv10{
+.pv10 {
   padding-top: 10px;
   padding-bottom: 10px;
 }

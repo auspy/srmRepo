@@ -15,13 +15,14 @@
 
 /* FONTS */
 /* poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
 /* inter */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
 
 h2,
 .semi16,
-.semi14 {
+.semi14,
+h1,.mediP {
   font-family: "Poppins", sans-serif;
   color: var(--heading);
 }
@@ -47,7 +48,8 @@ h2,
 }
 
 .medi12,
-h2 {
+h2,
+h1 {
   font-weight: 500;
 }
 
@@ -82,21 +84,49 @@ h2 {
   font-size: 16px;
 }
 
-/* PAGE PADDING */
-#root {
-  width: 85%;
+h1 {
+  font-size: 40px;
 }
 
-body {
+/* PAGE PADDING */
+#root{
+  width:100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+body {
+  justify-content: center;
+  display: flex;
 }
 
 /* BACKGROUNDS */
-.bgLightBg,body{
-background-color: var(--lightBg);
+.bgLightBg,
+body {
+  background-color: var(--lightBg);
 }
 
-.bgSrmBlue{
+.bgSrmBlue {
   background-color: var(--srmBlue);
+}
+.bgLightBlue {
+  background-color: var(--lightBlue);
+}
+
+/* COLORS */
+.bColor {
+  color: var(--srmBlue);
+}
+.hColor {
+  color: var(--heading);
+}
+.notSelectColor {
+  color: var(--notSelect);
+}
+
+/* LINES */
+.blueLine{
+  height: 1px;
+  width: 100%;
+  background-color: var(--lightBlue);
 }
