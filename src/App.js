@@ -1,11 +1,13 @@
-import './static/css/common.css'
-import './static/css/App.css';
+import "./static/css/common.css";
+import "./static/css/App.css";
+import Header from "./components/Header";
+import SubHeader from "./components/SubHeader";
 
 function App() {
   return (
     <div>
-      <h2>nice</h2>
-      <span className='regu12'>test</span>
+      <Header />
+      <SubHeader />
     </div>
   );
 }
