@@ -1,0 +1,33 @@
+.maintag {
+  height: 500px;
+  background: #0060af;
+  top: 120px;
+  left: 0.5px;
+}
+.info {
+  display: inline-block;
+  position: absolute;
+  width: 800px;
+}
+.infocontainer {
+  margin-left: 80px;
+}
+.heading {
+  margin-top: 100px;
+
+  margin-bottom: 25px;
+  text-align: left;
+  color: white;
+}
+.infomaterial {
+  color: white;
+  width: 560px;
+}
+.img {
+  display: inline-block;
+  margin-left: 800px;
+}
+.image {
+  height: 500px;
+  width: 600px;
+}
