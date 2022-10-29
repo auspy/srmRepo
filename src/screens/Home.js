@@ -1,3 +1,4 @@
+
 import LeftMenu from "../components/home/LeftMenu";
 
 const Home = () => {
@@ -112,7 +113,7 @@ const ViewMoreBtn = (props) => {
   );
 };
 
-const DepartItem = (props) => {
+ export const DepartItem = (props) => {
   return (
     <>
       <div
@@ -165,6 +166,8 @@ const DepartItem = (props) => {
     </>
   );
 };
+
+
 
 // COMMON ELEMENTS
 
