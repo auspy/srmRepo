@@ -17,23 +17,25 @@
 /* poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
 /* inter */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300,400;500&display=swap");
 
-h2,
-.semi16,
-.semi14,
-h1,.mediP {
-  font-family: "Poppins", sans-serif;
-  color: var(--heading);
-}
 .regu10,
 .regu11,
 .regu12,
 .regu13,
 .regu14,
 .medi12,
-.regu16 {
+.regu16,
+.light13 {
   font-family: "Inter", sans-serif;
+  color: var(--heading);
+}
+
+h2,
+.semi16,
+.semi14,
+h1,.mediP,.popi {
+  font-family: "Poppins", sans-serif;
   color: var(--heading);
 }
 
@@ -72,7 +74,7 @@ h2 {
 .medi12 {
   font-size: 12px;
 }
-.regu13 {
+.regu13,.light13 {
   font-size: 13px;
 }
 .regu14,
@@ -122,6 +124,9 @@ body {
 }
 .notSelectColor {
   color: var(--notSelect);
+}
+.paraColor {
+  color: var(--para);
 }
 
 /* LINES */

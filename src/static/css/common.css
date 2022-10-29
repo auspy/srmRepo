@@ -102,7 +102,7 @@ a:hover {
 }
 
 /* FLEX */
-/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, */
+/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, fccc */
 .f1 {
   flex: 1;
 }
@@ -116,7 +116,8 @@ a:hover {
 .frcsa,
 .frfs,
 .fcfe,
-.frcc {
+.frcc,
+.fccc {
   display: flex;
 }
 
@@ -126,7 +127,8 @@ a:hover {
 .fccsb,
 .frcsa,
 .frfs,
-.frcc {
+.frcc,
+.fccc {
   flex-direction: row;
   align-items: center;
 }
@@ -143,7 +145,8 @@ a:hover {
 .fccsb,
 .fcfs,
 .fcfssb,
-.fcfe {
+.fcfe,
+.fccc {
   flex-direction: column;
 }
 
@@ -162,7 +165,8 @@ a:hover {
   justify-content: space-around;
 }
 
-.frcc{
+.frcc,
+.fccc {
   justify-content: center;
 }
 
@@ -219,6 +223,9 @@ button {
 }
 .mt15 {
   margin-top: 15px;
+}
+.mt10 {
+  margin-top: 10px;
 }
 .mt5 {
   margin-top: 5px;

@@ -10,7 +10,8 @@ const Header = () => {
         style={{
           marginBottom: 40,
           marginLeft: "7.5%",
-          marginRight: "7.15%",
+          marginRight: "5.4%",
+          zIndex:2
         }}
       >
         {/* logo */}

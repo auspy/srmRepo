@@ -1,17 +1,12 @@
 import LeftMenu from "../components/home/LeftMenu";
 
-const contentSpacing = {
-  marginLeft: "11%",
-  marginRight: "11%",
-  marginBottom: 80,
-};
 const Home = () => {
   return (
     <div
       className="rPosi fcc"
       style={{
         width: "100%",
-        zIndex: -1,
+        zIndex: 0,
       }}
     >
       <LeftMenu />
@@ -27,6 +22,7 @@ const Home = () => {
         {/* TOP CONTRIBUTORS */}
         <TopContri />
         {/* DEPARTMENTS */}
+        <Departments />
       </div>
     </div>
   );
@@ -34,13 +30,205 @@ const Home = () => {
 
 export default Home;
 
+// DEPARTMENT ELEMENTS
+// 6 items only
+
+const departments = [
+  { img: "", name: "Computer Science is getting tested", docs: 109, href: "/" },
+  { img: "", name: "Computer Science", docs: 109, href: "/" },
+  { img: "", name: "Computer Science", docs: 109, href: "/" },
+  { img: "", name: "Computer Science", docs: 109, href: "/" },
+  { img: "", name: "Computer Science", docs: 109, href: "/" },
+  { img: "", name: "Computer Science", docs: 109, href: "/" },
+];
+
+const Departments = () => {
+  return (
+    <>
+      <div
+        style={{
+          backgroundColor: "var(--srmBlue)",
+          height: 850,
+        }}
+        className="gcc"
+      >
+        {/* CONTENT */}
+        <div
+          style={{
+            ...contentSpacing,
+            marginTop: 100,
+          }}
+          className="fcc"
+        >
+          {/* HEADING */}
+          <HomeHeading
+            h1={"Find researches from"}
+            h2={"departments"}
+            subHeading={"srm departments"}
+            subColor={"white"}
+            h1Color={"white"}
+            h2Color={"var(--lightBlue)"}
+          />
+          {/* ITEMS */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3,1fr)",
+              gap: "30px 28px",
+            }}
+            className={"mt40"}
+          >
+            {departments?.map((item, i) => (
+              <DepartItem key={item + i} info={item} />
+            ))}
+          </div>
+          {/* BUTTON */}
+          <div className="mt40">
+            <ViewMoreBtn />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+const ViewMoreBtn = (props) => {
+  return (
+    <button
+      className=""
+      style={{
+        backgroundColor: "white",
+        border: " 1px solid var(--srmBlue)",
+        borderRadius: 20,
+      }}
+    >
+      <span
+        className="semi16 bColor caps"
+        style={{ color: props.textColor || null, padding: "7px 18px" }}
+      >
+        View More
+      </span>
+    </button>
+  );
+};
+
+const DepartItem = (props) => {
+  return (
+    <>
+      <div
+        style={{
+          maxHeight: 228,
+          width: 238,
+          backgroundColor: "white",
+          borderRadius: 10,
+        }}
+        className="fcc"
+      >
+        {/* IMAGE */}
+        <div
+          style={{
+            width: 238,
+            height: 145.02,
+            borderRadius: 10,
+            overflow: "hidden",
+          }}
+        >
+          <img
+            width={"inherit"}
+            alt={"dapartment"}
+            src={props.info?.img || require("../static/images/depart.png")}
+          />
+        </div>
+        {/* TEXT */}
+        <div
+          className="fcc"
+          style={{
+            height: 84,
+            maxWidth: 218,
+            justifyContent: "center",
+          }}
+        >
+          {/* <div className="fcc"> */}
+          <a
+            className="regu16 mediP caps"
+            style={{ textAlign: "center" }}
+            href={props.info?.href}
+          >
+            {props.info?.name}
+          </a>
+          <span className="light13 caps notSelectColor mt10">
+            {props.info?.docs} Researches
+          </span>
+          {/* </div> */}
+        </div>
+      </div>
+    </>
+  );
+};
+
+// COMMON ELEMENTS
+
+const contentSpacing = {
+  marginLeft: "8.2%",
+  marginRight: "8.2%",
+  marginBottom: 100,
+};
+
+const HomeHeading = (props) => {
+  return (
+    <>
+      <div className="fcc">
+        <span
+          className="regu12 popi upper frc"
+          style={{
+            letterSpacing: 1.8,
+            color: props.subColor || "var(--notSelect)",
+          }}
+        >
+          {props.subHeading}
+        </span>
+        <div
+          className="blueLine mv10"
+          style={{
+            width: 50,
+          }}
+        />
+        <span
+          className={`mediP frc caps`}
+          style={{
+            color: props.h1Color || "var(--heading)",
+            fontSize: 28,
+          }}
+        >
+          {props.h1}{" "}
+          <span
+            className="ml5"
+            style={{
+              color: props.h2Color || "var(--srmBlue)",
+            }}
+          >
+            {props.h2}
+          </span>
+        </span>
+      </div>
+    </>
+  );
+};
+
+// TOP CONTRI ELEMENTS
+
 const topContri = [
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46 },
+  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
+  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
+  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
+  {
+    name: "Anjali Mehta is here",
+    post: "assistant professor wow is she",
+    docs: 46123131231,
+    href: "/",
+  },
+  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
+  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
 ];
 
 const TopContri = () => {
@@ -50,7 +238,6 @@ const TopContri = () => {
         className="fcc"
         style={{
           backgroundColor: "white",
-          height: 847,
         }}
       >
         {/* CONTENT */}
@@ -66,7 +253,7 @@ const TopContri = () => {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2,1fr)",
-              gap: "30px 90px",
+              gap: "30px 60px",
             }}
             className={"mt40"}
           >
@@ -84,50 +271,53 @@ const TopContriItem = (props) => {
   return (
     <>
       <div
+        className="gcc"
         style={{
           background: "white",
           border: "1px solid var(--border)",
           borderRadius: 5,
-          width: 340,
+          width: 355,
           height: 175,
+          padding: 30,
+          boxSizing: "border-box",
         }}
-      ></div>
-    </>
-  );
-};
-
-// const ViewMoreBtn = () => {
-//   return <></>;
-// };
-
-const HomeHeading = (props) => {
-  return (
-    <>
-      <div className="fcc">
-        <span className="regu14 upper frc">{props.subHeading}</span>
+      >
         <div
-          className="blueLine mv10"
+          className="frc"
           style={{
-            width: 30,
-          }}
-        />
-        <span
-          className={`mediP frc hColor caps`}
-          style={{
-            color: props.color || null,
-            fontSize: 28,
+            height: "100%",
+            width: "100%",
           }}
         >
-          {props.h1} <span className="bColor ml5">{props.h2}</span>
-        </span>
+          <img
+            src={props.info?.img || require("../static/images/contri.png")}
+            height={114}
+            alt="contributor"
+          />
+          <div className="fcfssb ml30" style={{ height: "inherit" }}>
+            <div className="fcfs">
+              <a className="regu16 caps mediP" style={{}} href={props.info?.href} >
+                {props.info?.name || "Anjali"}
+              </a>
+              <span className="light13 notSelectColor caps mt5" style={{}}>
+                {props.info?.post || "Assistant"}
+              </span>
+            </div>
+            <span className="light13 notSelectColor mt5">
+              {props.info?.docs + " Researches"}
+            </span>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
+// PDF VIEW ELEMENTS
+
 const pdf = [
   { name: 1 },
-  { name: 1, select: true },
+  { name: 1, select: true,href:"/" },
   { name: 1 },
   { name: 1 },
   { name: 1 },
@@ -194,9 +384,9 @@ const PdfView = () => {
               marginBottom: 5,
             }}
           />
-          <span className="semi16 frc bColor">
+          <a className="semi16 frc bColor" href="/">
             Alien Maps of an Ocean-Bearing World
-          </span>
+          </a>
           <span className="regu13 frc notSelectColor mt5">
             Cowan, Nicolas B.; Agol, Eric; Meadows, Victoria S.; Robinson,
             Tyler; Livengood, Timothy A.; e.a. (IOP Publishing, 2009-07)

@@ -8,6 +8,7 @@ const SubHeader = () => {
         width: "100%",
         left: 0,
         justifyContent: "center",
+        zIndex:2
       }}
     >
       <div style={{ width: "85%", overflow: "hidden" }} className={"frc"}>
