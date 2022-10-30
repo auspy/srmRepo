@@ -3,15 +3,17 @@ const SubHeader = () => {
     <div
       className="aPosi bgSrmBlue frc"
       style={{
-        top: 80,
+        top: 75,
         height: 40,
         width: "100%",
         left: 0,
-        justifyContent: "center",
+        paddingInlineStart: 120,
+        boxSizing: "border-box",
+        paddingInlineEnd: 120,
         zIndex:2
       }}
     >
-      <div style={{ width: "85%", overflow: "hidden" }} className={"frc"}>
+      <div style={{overflow: "hidden" }} className={"frc w100"}>
         {items?.map((item, i) => (
           <a
             key={item + i}

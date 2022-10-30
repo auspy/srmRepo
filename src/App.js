@@ -2,15 +2,23 @@ import "./static/css/common.css";
 import "./static/css/App.css";
 import Header from "./components/Header";
 import SubHeader from "./components/SubHeader";
-import Home from "./screens/Home";
+import RootNavi from "./navigation/RootNavi";
 
 function App() {
   return (
     <>
-      <Header />
-      <SubHeader />
+      <div
+        style={
+          {
+            // paddingBottom:115
+          }
+        }
+      >
+        <Header />
+        <SubHeader />
+      </div>
       {/* SCREENS */}
-      <Home />
+      <RootNavi />
     </>
   );
 }

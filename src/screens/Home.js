@@ -3,18 +3,20 @@ import LeftMenu from "../components/home/LeftMenu";
 const Home = () => {
   return (
     <div
+      id="home"
       className="rPosi fcc"
       style={{
-        width: "100%",
-        zIndex: 0,
+        width: "100vw",
+        // zIndex: 3,
+        paddingInlineStart: 489,
+        boxSizing: "border-box",
       }}
     >
       <LeftMenu />
       {/* RIGHT SIDE */}
       <div
         style={{
-          width: "65%",
-          alignSelf: "flex-end",
+          width: "100%",
         }}
       >
         {/* PDF VIEW */}
@@ -169,8 +171,8 @@ const DepartItem = (props) => {
 // COMMON ELEMENTS
 
 const contentSpacing = {
-  marginLeft: "8.2%",
-  marginRight: "8.2%",
+  // marginLeft: "8.2%",
+  // marginRight: "8.2%",
   marginBottom: 100,
 };
 
@@ -296,7 +298,11 @@ const TopContriItem = (props) => {
           />
           <div className="fcfssb ml30" style={{ height: "inherit" }}>
             <div className="fcfs">
-              <a className="regu16 caps mediP" style={{}} href={props.info?.href} >
+              <a
+                className="regu16 caps mediP"
+                style={{}}
+                href={props.info?.href}
+              >
                 {props.info?.name || "Anjali"}
               </a>
               <span className="light13 notSelectColor caps mt5" style={{}}>
@@ -317,7 +323,7 @@ const TopContriItem = (props) => {
 
 const pdf = [
   { name: 1 },
-  { name: 1, select: true,href:"/" },
+  { name: 1, select: true, href: "/" },
   { name: 1 },
   { name: 1 },
   { name: 1 },
@@ -325,9 +331,9 @@ const pdf = [
 const PdfView = () => {
   const bgBoxesStyle = {
     position: "relative",
-    width: 245,
+    width: 224,
     opacity: 0.4,
-    height: 316,
+    height: 318,
     backgroundColor: "var(--border)",
     filter: "drop-shadow(0px 10px 30px rgba(51, 51, 51, 0.16))",
   };
@@ -335,80 +341,111 @@ const PdfView = () => {
     <>
       <div
         style={{
-          ...contentSpacing,
+          backgroundColor: "var(--lightBg)",
         }}
       >
         {/* 3 PAGES BOX */}
         <div
-          className="frcc"
           style={{
+            ...contentSpacing,
             paddingTop: 130,
           }}
+          className="fcc"
         >
-          {/* background page left */}
-          <div
-            style={{
-              ...bgBoxesStyle,
-              left: 15,
-            }}
-          ></div>
-          {/* main page */}
-          <div
-            style={{
-              position: "relative",
-              bottom: 80,
-              zIndex: 2,
-              width: 353,
-              height: 444,
-              backgroundColor: "var(--border)",
-              filter: "drop-shadow(0px 10px 30px rgba(51, 51, 51, 0.16))",
-            }}
-          ></div>
-          {/* background page right */}
-          <div
-            style={{
-              ...bgBoxesStyle,
-              right: 15,
-            }}
-          ></div>
-        </div>
-
-        {/* DESCRIPTION */}
-        <div>
-          <span className="regu10 upper frc">operating system</span>
-          <div
-            className="blueLine"
-            style={{
-              width: 30,
-              marginTop: 5,
-              marginBottom: 5,
-            }}
-          />
-          <a className="semi16 frc bColor" href="/">
-            Alien Maps of an Ocean-Bearing World
-          </a>
-          <span className="regu13 frc notSelectColor mt5">
-            Cowan, Nicolas B.; Agol, Eric; Meadows, Victoria S.; Robinson,
-            Tyler; Livengood, Timothy A.; e.a. (IOP Publishing, 2009-07)
-          </span>
-        </div>
-        {/* BULLETS */}
-        <div className="gcc mt30">
-          <div className="frc">
-            {pdf?.map((item, i) => (
-              <div
-                key={item + i}
+          <div className="frcc">
+            {/* background page left */}
+            <div
+              style={{
+                ...bgBoxesStyle,
+                // overflow: "hidden",
+                left: 15,
+              }}
+              className="frc"
+            >
+              <img
+                src={require("../static/images/pdf.png")}
                 style={{
-                  height: 8,
-                  width: 8,
-                  borderRadius: 10,
-                  marginRight: i === pdf.length - 1 ? 0 : 14,
-                  backgroundColor: item.select
-                    ? "var(--srmBlue)"
-                    : "var(--border)",
+                  width: "100%",
                 }}
+                alt="pdf"
               />
-            ))}
+            </div>
+            {/* main page */}
+            <div
+              className="frc"
+              style={{
+                position: "relative",
+                bottom: 80,
+                zIndex: 2,
+                width: 326,
+                height: 464,
+                backgroundColor: "var(--border)",
+                filter: "drop-shadow(0px 10px 30px rgba(51, 51, 51, 0.16))",
+              }}
+            >
+              <img
+                src={require("../static/images/pdf.png")}
+                style={{
+                  width: "100%",
+                }}
+                alt="pdf"
+              />
+            </div>
+            {/* background page right */}
+            <div
+              className="frc"
+              style={{
+                ...bgBoxesStyle,
+                // overflow: "hidden",
+                right: 15,
+              }}
+            >
+              <img
+                src={require("../static/images/pdf.png")}
+                style={{
+                  width: "100%",
+                }}
+                alt="pdf"
+              />
+            </div>
+          </div>
+          {/* DESCRIPTION */}
+          <div style={{ width: 775, alignSelf: "center" }}>
+            <span className="regu10 upper frc">operating system</span>
+            <div
+              className="blueLine"
+              style={{
+                width: 30,
+                marginTop: 5,
+                marginBottom: 5,
+              }}
+            />
+            <a className="semi16 frc bColor" href="/">
+              Alien Maps of an Ocean-Bearing World
+            </a>
+            <span className="regu13 frc notSelectColor mt5">
+              Cowan, Nicolas B.; Agol, Eric; Meadows, Victoria S.; Robinson,
+              Tyler; Livengood, Timothy A.; e.a. (IOP Publishing, 2009-07)
+            </span>
+          </div>
+          {/* BULLETS */}
+          <div className="gcc mt30">
+            <div className="frc">
+              {pdf?.map((item, i) => (
+                <div
+                  key={item + i}
+                  style={{
+                    height: 8,
+                    width: 8,
+                    borderRadius: 10,
+                    marginRight: i === pdf.length - 1 ? 0 : 14,
+                    backgroundColor: item.select
+                      ? "var(--srmBlue)"
+                      : "var(--border)",
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

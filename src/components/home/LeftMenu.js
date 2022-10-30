@@ -5,25 +5,38 @@ const LeftMenu = () => {
     <div
       className="bgLightBg"
       style={{
-        width: "35%",
+        width: 489,
         boxShadow: "2px 0px 20px rgba(0, 0, 0, 0.07)",
         height: "100%",
         position: "fixed",
         left: 0,
+        top: 0,
+        zIndex: 1,
         boxSizing: "border-box",
       }}
     >
+      {/* blue line */}
+      <div
+        className="bgSrmBlue gcc"
+        style={{
+          height: 2,
+          width: "100%",
+          position: "relative",
+          top: 80,
+        }}
+      ></div>
       {/* left menu content */}
       <div
         style={{
           marginTop: 100,
           marginRight: 40,
-          marginLeft: "21.5%",
+          marginLeft: 120,
+          paddingTop: 100,
         }}
       >
         {/* serachbar and heading */}
         <div>
-          <h1 className="bColor">SRM repository</h1>
+          <h1 className="bColor caps">SRM repository</h1>
           <div className="mt30">
             <span className="regu12 caps mb5 frc">
               Explore research papers by srm university
@@ -40,16 +53,16 @@ const LeftMenu = () => {
           {/* heading */}
           <span className="semi14">Top searched links</span>
           {/* blue line */}
-          <div className="blueLine mt15" />
+          <div className="blueLine mt15" style={{width:331}} />
           {/* links */}
           <div className="fcfs">
             {topLinks?.map((item, i) => (
               <a
                 href={item.href}
                 key={item + i}
-                className={`mv10 hColor regu13`}
+                className={`mv10 hColor regu13 ml5`}
               >
-                - {item.name}
+                {"-> "} {item.name}
               </a>
             ))}
           </div>

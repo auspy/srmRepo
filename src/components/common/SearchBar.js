@@ -14,7 +14,7 @@ const SearchBar = () => {
         height: 60,
         borderRadius: 5,
         width:"fit-content",
-        filter: "drop-shadow(0px 4px 12px rgba(51, 51, 51, 0.1))",
+        filter: "drop-shadow(0px 6px 20px rgba(51, 51, 51, 0.12))",
       }}
     >
       <input

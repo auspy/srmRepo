@@ -17,7 +17,7 @@
 /* poppins */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
 /* inter */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300,400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 
 .regu10,
 .regu11,
@@ -34,12 +34,18 @@
 h2,
 .semi16,
 .semi14,
-h1,.mediP,.popi {
+h1,
+.mediP,
+.popi {
   font-family: "Poppins", sans-serif;
   color: var(--heading);
 }
 
 /* TEXT */
+.light13 {
+  font-weight: 300;
+}
+
 .regu10,
 .regu11,
 .regu12,
@@ -74,7 +80,8 @@ h2 {
 .medi12 {
   font-size: 12px;
 }
-.regu13,.light13 {
+.regu13,
+.light13 {
   font-size: 13px;
 }
 .regu14,
@@ -91,8 +98,8 @@ h1 {
 }
 
 /* PAGE PADDING */
-#root{
-  width:100vw;
+#root {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -130,8 +137,29 @@ body {
 }
 
 /* LINES */
-.blueLine{
+.blueLine {
   height: 1px;
   width: 100%;
   background-color: var(--lightBlue);
+}
+
+/* HEADER TRANSITION */
+.slide {
+  /* transition: width 2s; */
+  transform: translateY(100px);
+}
+
+/* LOGO */
+.test {
+  position: fixed;
+  top: 10px;
+  z-index: 3;
+}
+
+/* IMG */
+.pdf {
+  background: url(../images/pdf.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: 0;
 }
