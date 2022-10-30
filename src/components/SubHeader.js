@@ -1,16 +1,20 @@
+import { useLocation } from "react-router-dom";
+
 const SubHeader = () => {
+  const { pathname } = useLocation();
+  // CONDITIONS
+  const pages = ["Departments"]
+  const pathArr =  pathname?.split("/")
+  const headerColorCond =pages.some((item)=>pathArr?.includes(item))
   return (
     <div
-      className="aPosi bgSrmBlue frc"
+      className={`aPosi frc container`}
       style={{
         top: 75,
-        height: 40,
-        width: "100%",
+        height: 45,
         left: 0,
-        paddingInlineStart: 120,
-        boxSizing: "border-box",
-        paddingInlineEnd: 120,
-        zIndex:2
+        zIndex:2,
+        backgroundColor:headerColorCond?"#11304A":"var(--srmBlue)",
       }}
     >
       <div style={{overflow: "hidden" }} className={"frc w100"}>

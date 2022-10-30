@@ -76,9 +76,9 @@ const LeftMenu = () => {
 export default LeftMenu;
 
 // 7 links
-const topLinks = [
+export const topLinks = [
   { name: "Departments", href: "/Departments" },
-  { name: "Link name", href: "/" },
+  { name: "Test1", href: "/Departments/Engineering%20Test1" },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },

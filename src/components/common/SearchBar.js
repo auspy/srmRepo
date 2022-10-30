@@ -1,6 +1,6 @@
 import IconSearch from "../../static/icons/IconSearch";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const commonStyle = {
     padding: "0px 15px",
     border: "1px solid #EAEAEA",
@@ -11,7 +11,7 @@ const SearchBar = () => {
     <div
       className="frc"
       style={{
-        height: 60,
+        height: props.height||60,
         borderRadius: 5,
         width:"fit-content",
         filter: "drop-shadow(0px 6px 20px rgba(51, 51, 51, 0.12))",
@@ -20,7 +20,7 @@ const SearchBar = () => {
       <input
         style={{
           ...commonStyle,
-          width:277,
+          width:props.width||277,
           borderRadius: "5px 0px 0px 5px",
           color: "var(--heading)",
         }}

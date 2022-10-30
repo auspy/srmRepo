@@ -15,7 +15,7 @@
 
 /* FONTS */
 /* poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 /* inter */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 
@@ -42,7 +42,8 @@ h1,
 }
 
 /* TEXT */
-.light13 {
+.light13,
+.light {
   font-weight: 300;
 }
 
@@ -57,12 +58,15 @@ h1,
 
 .medi12,
 h2,
-h1 {
+h1,
+.mediP,
+.medi {
   font-weight: 500;
 }
 
 .semi14,
-.semi16 {
+.semi16,
+.semi {
   font-weight: 600;
 }
 
@@ -95,6 +99,7 @@ h2 {
 
 h1 {
   font-size: 40px;
+  color: white;
 }
 
 /* PAGE PADDING */
@@ -107,6 +112,9 @@ h1 {
 body {
   justify-content: center;
   display: flex;
+}
+button{
+  background: none;
 }
 
 /* BACKGROUNDS */
@@ -121,6 +129,9 @@ body {
 .bgLightBlue {
   background-color: var(--lightBlue);
 }
+.bgDark {
+  background-color: var(--para);
+}
 
 /* COLORS */
 .bColor {
@@ -133,14 +144,23 @@ body {
   color: var(--notSelect);
 }
 .paraColor {
-  color: var(--para);
+  color: var(--lightText);
+}
+.wColor{
+  color:white
+}
+.lBColor{
+  color: var(--lightBlue);
 }
 
 /* LINES */
-.blueLine {
+.blueLine,.lightLine {
   height: 1px;
   width: 100%;
   background-color: var(--lightBlue);
+}
+.lightLine {
+  background-color: var(--darkBg);
 }
 
 /* HEADER TRANSITION */
@@ -165,11 +185,19 @@ body {
 }
 
 /* HOVER */
-a:hover{
-color: var(--lightBlue);
+a:hover,.filter:hover {
+  color: var(--lightBlue);
 }
 
-#header a:hover{
+#header a:hover {
   color: var(--srmBlue);
   font-weight: 600;
+}
+
+/* COMMON CONTAINER */
+.container {
+  box-sizing: border-box;
+  padding-inline-start: 120px;
+  padding-inline-end: 120px;
+  width: 100vw;
 }

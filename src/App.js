@@ -14,8 +14,12 @@ function App() {
   }, [pathname]);
   return (
     <>
-      <Header />
-      <SubHeader/>
+      {!pathname.includes("/Login") && (
+        <>
+          <Header />
+          <SubHeader />
+        </>
+      )}
 
       {/* <SubHeader /> */}
       {/* SCREENS */}

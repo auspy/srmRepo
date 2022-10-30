@@ -5,7 +5,10 @@ import IconSearch from "../static/icons/IconSearch";
 
 const Header = () => {
   const { pathname } = useLocation();
+  // CONDITIONS
   const homeCond = pathname === "/";
+
+  // LOGO FIXED AND NORMAL
   useEffect(() => {
     if (homeCond) {
       document.getElementById("logo").classList.remove("dNone");
@@ -17,15 +20,11 @@ const Header = () => {
     <>
       <div
         id="header"
-        className="pv10 bgLightBg fcc"
+        className={`pv10 bgLightBg fcc container`}
         style={{
-          boxSizing: "border-box",
-          width: "100vw",
-          marginBottom: 37,
+          marginBottom: 42,
           zIndex: 3,
           position: "relative",
-          paddingInlineStart: 120,
-          paddingInlineEnd: 120,
         }}
       >
         {/* CONTENT */}
@@ -90,4 +89,9 @@ const menuItems = [
   { name: "About SRM", href: "/" },
   { name: "Visit SRM Website", href: "/" },
 ];
-const icons = [<IconSearch />, <IconProfile />];
+const icons = [
+  <IconSearch />,
+  <Link to={"/Login"} className="frc">
+    <IconProfile />
+  </Link>,
+];

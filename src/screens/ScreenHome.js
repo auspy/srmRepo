@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Descrip from "../components/home/Descrip";
 import LeftMenu from "../components/home/LeftMenu";
 
 const Home = () => {
@@ -154,15 +155,15 @@ export const DepartItem = (props) => {
           }}
         >
           {/* <div className="fcc"> */}
-          <a
+          <Link
             className="regu16 mediP caps"
             style={{ textAlign: "center" }}
-            href={props.info?.href}
+            to={props.info?.href}
           >
-            {props.info?.name}
-          </a>
+            {props.info?.name || "Development Name"}
+          </Link>
           <span className="light13 caps notSelectColor mt10">
-            {props.info?.docs} Researches
+            {props.info?.docs || "99"} Researches
           </span>
           {/* </div> */}
         </div>
@@ -413,23 +414,9 @@ const PdfView = () => {
             </div>
           </div>
           {/* DESCRIPTION */}
-          <div style={{ width: 775, alignSelf: "center" }}>
-            <span className="regu10 upper frc">operating system</span>
-            <div
-              className="blueLine"
-              style={{
-                width: 30,
-                marginTop: 5,
-                marginBottom: 5,
-              }}
-            />
-            <a className="semi16 frc bColor" href="/">
-              Alien Maps of an Ocean-Bearing World
-            </a>
-            <span className="regu13 frc notSelectColor mt5">
-              Cowan, Nicolas B.; Agol, Eric; Meadows, Victoria S.; Robinson,
-              Tyler; Livengood, Timothy A.; e.a. (IOP Publishing, 2009-07)
-            </span>
+          
+          <div style={{ width: 775, alignSelf: "center" }} >
+            <Descrip />
           </div>
           {/* BULLETS */}
           <div className="gcc mt30">

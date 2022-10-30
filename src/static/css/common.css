@@ -66,7 +66,7 @@ a:hover {
 }
 
 /* FLEX */
-/* f1, fcfs, fcfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, fccc */
+/* f1, fcfs, fcfssb, frfssb, frc, fcc, frcsb, fccsb, frcsa, frfs, fcfe, frcc, fccc */
 .f1 {
   flex: 1;
 }
@@ -81,7 +81,8 @@ a:hover {
 .frfs,
 .fcfe,
 .frcc,
-.fccc {
+.fccc,
+.frfssb {
   display: flex;
 }
 
@@ -95,10 +96,6 @@ a:hover {
 .fccc {
   flex-direction: row;
   align-items: center;
-}
-
-.frfs {
-  align-items: flex-start;
 }
 
 .fcfe {
@@ -115,13 +112,16 @@ a:hover {
 }
 
 .fcfs,
-.fcfssb {
+.fcfssb,
+.frfs,
+.frfssb {
   align-items: flex-start;
 }
 
 .frcsb,
 .fccsb,
-.fcfssb {
+.fcfssb,
+.frfssb {
   justify-content: space-between;
 }
 
@@ -143,7 +143,7 @@ button {
 }
 
 /* MARGIN */
-/* mr30, mr20, mr5, mb20, mb15, mv10,mv20, mh10, mt30, mt40, mt15, mt5, ml15, ml30 */
+/* mr30, mr20, mr5, mb20, mb15, mv10,mv20, mh10, mt30, mt40, mt15, mt5,mt60, ml15, ml30 */
 
 .mr30 {
   margin-right: 30px;
@@ -185,6 +185,9 @@ button {
 .mt40 {
   margin-top: 40px;
 }
+.mt60 {
+  margin-top: 60px;
+}
 .mt15 {
   margin-top: 15px;
 }
@@ -216,7 +219,6 @@ button {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
 
 /* COMMON */
 /* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
