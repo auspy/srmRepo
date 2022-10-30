@@ -1,10 +1,18 @@
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import IconProfile from "../static/icons/IconProfile";
 import IconSearch from "../static/icons/IconSearch";
 
 const Header = () => {
   const { pathname } = useLocation();
   const homeCond = pathname === "/";
+  useEffect(() => {
+    if (homeCond) {
+      document.getElementById("logo").classList.remove("dNone");
+    } else {
+      document.getElementById("logo").classList.add("dNone");
+    }
+  }, [homeCond]);
   return (
     <>
       <div
@@ -13,11 +21,11 @@ const Header = () => {
         style={{
           boxSizing: "border-box",
           width: "100vw",
-          marginBottom:37,
-          zIndex:3,
-          position:"relative",
-          paddingInlineStart:120,
-          paddingInlineEnd:120,
+          marginBottom: 37,
+          zIndex: 3,
+          position: "relative",
+          paddingInlineStart: 120,
+          paddingInlineEnd: 120,
         }}
       >
         {/* CONTENT */}
@@ -29,20 +37,20 @@ const Header = () => {
         >
           {/* LOGO */}
           <div>
-            <a href="/" className={`frc ${homeCond&&"test"}`} id="logo">
+            <Link to="/" className={`frc ${homeCond && "test"}`} id="logo">
               <img
                 src={require("../static/images/logo.png")}
                 height={58}
                 alt="srm logo"
               />
-            </a>
-            <a href="/" className="frc" style={{opacity:0}}>
+            </Link>
+            <Link to="/" className="frc" style={{ opacity: homeCond ? 0 : 1 }}>
               <img
                 src={require("../static/images/logo.png")}
                 height={58}
                 alt="srm logo"
               />
-            </a>
+            </Link>
           </div>
           {/* NAVI */}
           <div>

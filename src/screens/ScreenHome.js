@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LeftMenu from "../components/home/LeftMenu";
 
 const Home = () => {
@@ -86,7 +87,7 @@ const Departments = () => {
           </div>
           {/* BUTTON */}
           <div className="mt40">
-            <ViewMoreBtn />
+            <ViewMoreBtn href={"/Departments"} />
           </div>
         </div>
       </div>
@@ -96,25 +97,27 @@ const Departments = () => {
 
 const ViewMoreBtn = (props) => {
   return (
-    <button
-      className=""
-      style={{
-        backgroundColor: "white",
-        border: " 1px solid var(--srmBlue)",
-        borderRadius: 20,
-      }}
-    >
-      <span
-        className="semi16 bColor caps"
-        style={{ color: props.textColor || null, padding: "7px 18px" }}
+    <Link to={props.href || "/"}>
+      <button
+        className=""
+        style={{
+          backgroundColor: "white",
+          border: " 1px solid var(--srmBlue)",
+          borderRadius: 20,
+        }}
       >
-        View More
-      </span>
-    </button>
+        <span
+          className="semi16 bColor caps"
+          style={{ color: props.textColor || null, padding: "7px 18px" }}
+        >
+          View More
+        </span>
+      </button>
+    </Link>
   );
 };
 
-const DepartItem = (props) => {
+export const DepartItem = (props) => {
   return (
     <>
       <div

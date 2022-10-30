@@ -163,3 +163,13 @@ body {
   background-size: contain;
   background-position-y: 0;
 }
+
+/* HOVER */
+a:hover{
+color: var(--lightBlue);
+}
+
+#header a:hover{
+  color: var(--srmBlue);
+  font-weight: 600;
+}

@@ -4,42 +4,6 @@
   border: 0;
 }
 
-/* COMMON */
-/* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
-.aPosi {
-  position: absolute;
-}
-.rPosi {
-  position: relative;
-}
-.z10 {
-  z-index: 10;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.dNone {
-  display: none;
-}
-
-.textCenter {
-  text-align: center;
-}
-
-.bgNone,
-.bgNone:disabled {
-  background: none;
-  border: none;
-}
-
-button:hover:enabled,
-input[type="button"]:hover:enabled {
-  opacity: 0.7;
-  cursor: pointer;
-}
-
 /* LINK */
 a {
   text-decoration: none;
@@ -251,4 +215,41 @@ button {
 .pv10 {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+
+/* COMMON */
+/* aPosi, rPosi, z10, w100, dNone, textCenter, bgNone */
+.aPosi {
+  position: absolute;
+}
+.rPosi {
+  position: relative;
+}
+.z10 {
+  z-index: 10;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.dNone {
+  display: none;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.bgNone,
+.bgNone:disabled {
+  background: none;
+  border: none;
+}
+
+button:hover:enabled,
+input[type="button"]:hover:enabled {
+  opacity: 0.7;
+  cursor: pointer;
 }

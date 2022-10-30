@@ -1,0 +1,36 @@
+.nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+  height: 50px;
+  border-bottom: 1px solid black;
+}
+.container {
+  margin-left: 10%;
+  width: 80%;
+  border-bottom: 1px solid black;
+}
+.nav li {
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 20px;
+  color: gray;
+}
+.innercontainer {
+  margin-top: 80px;
+}
+.info {
+  margin-top: 30px;
+}
+
+.heading {
+  font-size: 30px;
+}
+
+.blocks {
+  margin-top: 40px;
+
+  margin-bottom: 40px;
+}

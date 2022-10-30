@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SearchBar from "../common/SearchBar";
 
 const LeftMenu = () => {
@@ -57,13 +58,13 @@ const LeftMenu = () => {
           {/* links */}
           <div className="fcfs">
             {topLinks?.map((item, i) => (
-              <a
-                href={item.href}
+              <Link
+                to={item.href}
                 key={item + i}
                 className={`mv10 hColor regu13 ml5`}
               >
                 {"-> "} {item.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -76,7 +77,7 @@ export default LeftMenu;
 
 // 7 links
 const topLinks = [
-  { name: "Link name", href: "/" },
+  { name: "Departments", href: "/Departments" },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },
