@@ -18,6 +18,7 @@ const SearchBar = (props) => {
       }}
     >
       <input
+      type={"text"}
         style={{
           ...commonStyle,
           width:props.width||277,

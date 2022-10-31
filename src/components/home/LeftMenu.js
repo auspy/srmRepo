@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import paths from "../../paths";
 import SearchBar from "../common/SearchBar";
 
 const LeftMenu = () => {
@@ -77,8 +78,8 @@ export default LeftMenu;
 
 // 7 links
 export const topLinks = [
-  { name: "Departments", href: "/Departments" },
-  { name: "Test1", href: "/Departments/Engineering%20Test1" },
+  { name: "Departments", href: paths.collections() },
+  { name: "Test1", href: paths.collectionList("Test1") },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },

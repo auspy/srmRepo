@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import paths from "../paths";
 import IconProfile from "../static/icons/IconProfile";
 import IconSearch from "../static/icons/IconSearch";
 
@@ -84,10 +85,10 @@ export default Header;
 
 const menuItems = [
   { name: "Latest Updates", href: "/" },
-  { name: "Ranking", href: "/" },
-  { name: "Contact Us", href: "/" },
-  { name: "About SRM", href: "/" },
-  { name: "Visit SRM Website", href: "/" },
+  { name: "Authors", href: paths.collections("Authors") },
+  { name: "Research Papers", href: "/" },
+  { name: "About SRM", href: "https://srmuniversity.ac.in/welcome-to-srm/" },
+  { name: "Visit SRM Website", href: "https://srmuniversity.ac.in/" },
 ];
 const icons = [
   <IconSearch />,

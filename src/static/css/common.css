@@ -251,7 +251,7 @@ button {
 }
 
 button:hover:enabled,
-input[type="button"]:hover:enabled {
+input[type="button"]:hover:enabled,input[type="submit"]:hover:enabled {
   opacity: 0.7;
   cursor: pointer;
 }

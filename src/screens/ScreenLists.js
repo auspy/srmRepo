@@ -55,6 +55,9 @@ const WhiteBar = (props) => {
 };
 
 const Hero = () => {
+  const { pathname } = useLocation();
+  const pathArr = pathname.split("/");
+  const departName = pathArr[pathArr.length - 1].replaceAll("%20", " "); //getting department name from path
   const [filter, setFilter] = useState(null);
   return (
     <>
@@ -69,19 +72,18 @@ const Hero = () => {
           className=""
           style={{
             width: "100%",
-            // maxWidth: 1200,
           }}
         >
           {/* PATH */}
-          <Path />
+          <Path pathname={pathname} />
           {/* HEADING */}
           <h1
-            className=""
+            className="caps"
             style={{
               marginTop: 60,
             }}
           >
-            Computer Science
+            {departName}
           </h1>
           {/* SEARCH BAR */}
           <div className="mt30">
@@ -96,7 +98,7 @@ const Hero = () => {
   );
 };
 
-const AlphaFilter = (props) => {
+export const AlphaFilter = (props) => {
   const filterArr = [
     "0-9",
     "A",
@@ -149,34 +151,46 @@ const AlphaFilter = (props) => {
   );
 };
 
-export const Path = () => {
-  const { pathname } = useLocation();
+export const Path = (props) => {
   let to = "";
-  const arr = ("Home" + pathname).replaceAll("%20", " ").split("/");
+  const arr = ("Home" + props.pathname).replaceAll("%20", " ").split("/");
   const pathArr = arr.map((item, i) => {
     to = to + (item === "Home" ? "" : "/" + item);
     to = to.replace(" ", "%20");
     return { name: item, href: to || "/" };
   });
-  const lastEleCond = (i) => i === pathArr.length - 1;
+  // STYLE
+  const lastEleStyle = (i) =>
+    i === pathArr.length - 1
+      ? {
+          fontStyle: null,
+          color: "var(--lightBlue)",
+          opacity: 1,
+          textDecoration: "underline",
+          fontWeight: 500,
+        }
+      : {
+          fontStyle: "italic",
+          color: "white",
+          opacity: 0.7,
+          textDecoration: null,
+          fontWeight: null,
+        };
   return (
     <div className="regu12 frc mt40">
       {pathArr?.map((item, i) => [
+        
         <Link
           to={item.href}
           key={item + i}
+className="ml5"
           onClick={() => {
             console.log(to);
           }}
-          style={{
-            fontStyle: lastEleCond(i) ? null : "italic",
-            color: lastEleCond(i) ? "var(--lightBlue)" : "white",
-            opacity: lastEleCond(i) ? 1 : 0.7,
-            textDecoration: lastEleCond(i) ? "underline" : null,
-          }}
+          style={lastEleStyle(i)}
         >
-          {"/" + item.name}
-        </Link>,
+          <span className="wColor mr5" style={{...lastEleStyle(99),opacity:i === pathArr.length - 1?0.7:null}}>/</span>{item.name}
+        </Link>
       ])}
     </div>
   );
@@ -197,13 +211,16 @@ const BelowHero = () => {
         <div className="fcfs" style={{ gap: 30 }}>
           {papers?.map((item, i) => [
             <Descrip
-              key={item + i}
+              key={item.name + i}
               date={item.date}
               name={item.name}
               conference={item.conference}
               authors={item.authors}
             />,
-            <div className="lightLine" />,
+            <div
+              key={item.name + new Date().getMilliseconds()}
+              className="lightLine"
+            />,
           ])}
         </div>
 

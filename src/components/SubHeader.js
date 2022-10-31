@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 const SubHeader = () => {
   const { pathname } = useLocation();
   // CONDITIONS
-  const pages = ["Departments"]
+  const pages = ["Collections"]
   const pathArr =  pathname?.split("/")
   const headerColorCond =pages.some((item)=>pathArr?.includes(item))
   return (
@@ -18,13 +18,13 @@ const SubHeader = () => {
       }}
     >
       <div style={{overflow: "hidden" }} className={"frc w100"}>
-        {items?.map((item, i) => (
+        {departItems?.map((item, i) => (
           <a
             key={item + i}
             className={`medi12 frc upper`}
             style={{
               color: "white",
-              marginRight: i !== items?.length - 1 ? 40 : 0,
+              marginRight: i !== departItems?.length - 1 ? 40 : 0,
               minWidth: "max-content",
             }}
             href={item.link}
@@ -39,7 +39,7 @@ const SubHeader = () => {
 
 export default SubHeader;
 
-const items = [
+const departItems = [
   {
     name: "BTech",
     link: "/",

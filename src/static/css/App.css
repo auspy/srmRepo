@@ -11,6 +11,7 @@
   --darkBg: #eaeaea;
   --bg: #f0f0f0;
   --lightBg: #fafafa;
+  --orange: #faa61a;
 }
 
 /* FONTS */
@@ -26,7 +27,8 @@
 .regu14,
 .medi12,
 .regu16,
-.light13 {
+.light13,
+.inter {
   font-family: "Inter", sans-serif;
   color: var(--heading);
 }
@@ -36,7 +38,8 @@ h2,
 .semi14,
 h1,
 .mediP,
-.popi {
+.popi,
+h3 {
   font-family: "Poppins", sans-serif;
   color: var(--heading);
 }
@@ -60,7 +63,8 @@ h1,
 h2,
 h1,
 .mediP,
-.medi {
+.medi,
+h3 {
   font-weight: 500;
 }
 
@@ -102,6 +106,11 @@ h1 {
   color: white;
 }
 
+h3 {
+  font-size: 30px;
+  color: white;
+}
+
 /* PAGE PADDING */
 #root {
   width: 100vw;
@@ -113,7 +122,7 @@ body {
   justify-content: center;
   display: flex;
 }
-button{
+button {
   background: none;
 }
 
@@ -146,15 +155,19 @@ body {
 .paraColor {
   color: var(--lightText);
 }
-.wColor{
-  color:white
+.wColor {
+  color: white;
 }
-.lBColor{
+.lBColor {
   color: var(--lightBlue);
+}
+.oColor {
+  color: var(--orange);
 }
 
 /* LINES */
-.blueLine,.lightLine {
+.blueLine,
+.lightLine {
   height: 1px;
   width: 100%;
   background-color: var(--lightBlue);
@@ -185,13 +198,30 @@ body {
 }
 
 /* HOVER */
-a:hover,.filter:hover {
+a:hover,
+.filter:hover,.whiteBarItem:hover {
   color: var(--lightBlue);
+}
+
+.whiteBarItem:hover{
+  border-bottom: 1px solid var(--lightBlue);
+  padding-bottom: 15px;
+  margin-top: 10px;
 }
 
 #header a:hover {
   color: var(--srmBlue);
   font-weight: 600;
+}
+.selectHover:hover{
+cursor: pointer;
+color: white;
+}
+
+.contHover:hover{
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 1;
 }
 
 /* COMMON CONTAINER */
@@ -200,4 +230,33 @@ a:hover,.filter:hover {
   padding-inline-start: 120px;
   padding-inline-end: 120px;
   width: 100vw;
+}
+
+/* INPUT */
+input[name="submitLogin"]:disabled {
+  background-color: var(--bg);
+  color: var(--notSelect);
+  border: 1px solid var(--darkBg);
+}
+
+input[name="submitLogin"]:enabled {
+  background-color: white;
+  border: 1px solid var(--srmBlue);
+}
+
+/* SELECT */
+select::-ms-expand {
+  display: none;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+/* LINE SPACING */
+.lineHeight15{
+  line-height: 1.5;
 }

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Descrip from "../components/home/Descrip";
 import LeftMenu from "../components/home/LeftMenu";
+import paths from "../paths";
 
 const Home = () => {
   return (
@@ -83,7 +84,10 @@ const Departments = () => {
             className={"mt40"}
           >
             {departments?.map((item, i) => (
-              <DepartItem key={item + i} info={item} />
+              <DepartItem
+                key={item + i}
+                info={{ ...item, href: paths.collectionList(item.name) }}
+              />
             ))}
           </div>
           {/* BUTTON */}
@@ -121,21 +125,23 @@ const ViewMoreBtn = (props) => {
 export const DepartItem = (props) => {
   return (
     <>
-      <div
+      <Link
+      to={props.info?.href}
         style={{
-          maxHeight: 228,
-          width: 238,
+          maxHeight: props.small ? 220 : 228,
+          width: props.small ? 220 : 238,
           backgroundColor: "white",
           borderRadius: 10,
+          border: props.small ? "1px solid var(--bg)":null,
         }}
-        className="fcc"
+        className="fcc contHover"
       >
         {/* IMAGE */}
         <div
           style={{
-            width: 238,
-            height: 145.02,
-            borderRadius: 10,
+            width: props.small ? 218 : 238,
+            height: props.small ? 120 : 145.02,
+            borderRadius: props.small ? "10px 10px 0px 0px" : 10,
             overflow: "hidden",
           }}
         >
@@ -150,7 +156,7 @@ export const DepartItem = (props) => {
           className="fcc"
           style={{
             height: 84,
-            maxWidth: 218,
+            maxWidth: props.small ? 180 : 218,
             justifyContent: "center",
           }}
         >
@@ -167,7 +173,7 @@ export const DepartItem = (props) => {
           </span>
           {/* </div> */}
         </div>
-      </div>
+      </Link>
     </>
   );
 };
@@ -264,7 +270,10 @@ const TopContri = () => {
             className={"mt40"}
           >
             {topContri?.map((item, i) => (
-              <TopContriItem key={item + i} info={item} />
+              <TopContriItem
+                key={item + i}
+                info={{ ...item, href: paths.profile(item.name) }}
+              />
             ))}
           </div>
         </div>
@@ -302,13 +311,13 @@ const TopContriItem = (props) => {
           />
           <div className="fcfssb ml30" style={{ height: "inherit" }}>
             <div className="fcfs">
-              <a
+              <Link
                 className="regu16 caps mediP"
                 style={{}}
-                href={props.info?.href}
+                to={props.info?.href}
               >
                 {props.info?.name || "Anjali"}
-              </a>
+              </Link>
               <span className="light13 notSelectColor caps mt5" style={{}}>
                 {props.info?.post || "Assistant"}
               </span>
@@ -414,8 +423,8 @@ const PdfView = () => {
             </div>
           </div>
           {/* DESCRIPTION */}
-          
-          <div style={{ width: 775, alignSelf: "center" }} >
+
+          <div style={{ width: 775, alignSelf: "center" }}>
             <Descrip />
           </div>
           {/* BULLETS */}
