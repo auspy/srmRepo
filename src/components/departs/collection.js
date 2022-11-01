@@ -1,16 +1,80 @@
 // import styles from "../../static/css/department.module.css";
-
-// import { useRef } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { DepartItem } from "../../screens/ScreenHome";
 
-export const Collection = () => {
-  // const testRef = useRef([])
-  // console.log(testRef);
+export const Collection = (props) => {
+  // TO GO TO TARGET HEADING
+  const testRef = useRef([]);
+  const whiteBarRef = useRef([]);
+  testRef.current =
+    departItems &&
+    Object.keys(departItems).map((ele, i) => testRef.current[i] ?? createRef());
+  whiteBarRef.current =
+    departItems &&
+    Object.keys(departItems).map(
+      (ele, i) => whiteBarRef.current[i] ?? createRef()
+    );
+
+  // VARIABLES
+  const [distFromTop, setDistFromTop] = useState(null);
+
+  useEffect(() => {
+    // TO CHECK ELEMENT IN VIEWPORT
+    const isInViewport = (element) => {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <=
+          (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <=
+          (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+    // TO HIGHLIGHT WHITEBAR ELEMENT IN VIEW
+    const checkHeadingInViewport = () => {
+      testRef.current.forEach((e, i) => {
+        if (isInViewport(e.current)) {
+          whiteBarRef.current[i].current?.classList.add("whiteBarItem");
+        } else {
+          whiteBarRef.current[i].current?.classList.remove("whiteBarItem");
+        }
+      });
+    };
+    if (distFromTop < -470) {
+      checkHeadingInViewport();
+    }
+
+    // FOR STICKY WHITE BAR
+    const whiteBar = document.getElementById("whiteBar");
+    const header = document.getElementById("header");
+    const makeWhiteBarSticky = () => {
+      // console.log(distFromTop, "dis");
+      if (distFromTop < -470) {
+        whiteBar?.classList.add("whiteBarSticky");
+        // checkHeadingInViewport();
+      } else {
+        whiteBar?.classList.remove("whiteBarSticky");
+        // reset whitebar colors
+        // whiteBarRef.current.forEach((e) => {
+        //   e.current?.classList.remove("whiteBarItem");
+        // });
+      }
+    };
+    const handleEvent = () => {
+      setDistFromTop(header?.getBoundingClientRect().top);
+      makeWhiteBarSticky();
+    };
+    window.addEventListener("scroll", handleEvent);
+    return () => {
+      window.removeEventListener("scroll", handleEvent);
+    };
+  }, [distFromTop]);
   return (
     <>
-      <WhiteBar />
+      <WhiteBar whiteBarRef={whiteBarRef} reff={testRef} sort={props.sort} />
       <div
-        className="fcc "
+        className="fcc"
         style={{
           width: "100%",
           height: "100%",
@@ -21,7 +85,10 @@ export const Collection = () => {
         {/* content */}
         {departItems &&
           Object.keys(departItems).map((key, index) => [
-            <div key={key + index} className={"w100 container"}>
+            <div
+              key={key + index + new Date().getSeconds()}
+              className={"w100 container"}
+            >
               <div className={""}>
                 {/* <h2 className={``}>{key}</h2> */}
                 <span
@@ -29,7 +96,10 @@ export const Collection = () => {
                   style={{
                     fontSize: 20,
                   }}
-                  // ref={ref=>testRef[index]=ref}
+                  ref={testRef.current[index]}
+                  onClick={() => {
+                    // console.log(testRef);
+                  }}
                 >
                   {key}
                 </span>
@@ -68,7 +138,10 @@ export const Collection = () => {
                 ))}
               </div>
             </div>,
-            <div className="lightLine" />,
+            <div
+              key={key + new Date().getMilliseconds()}
+              className="lightLine"
+            />,
           ])}
       </div>
     </>
@@ -77,22 +150,32 @@ export const Collection = () => {
 
 export default Collection;
 
-const WhiteBar = () => {
+const WhiteBar = (props) => {
+  // console.log(props);
+  const arrType = {
+    Departments: departItems && Object.keys(departItems),
+    Date: [
+      "1940-50",
+      "1950-60",
+      "1960-70",
+      "1970-80",
+      "1980-90",
+      "1990-2000",
+      "2000-10",
+      "2010-20",
+      "2020-30",
+    ],
+    Subjects: [
+      "Maths",
+      "Operating System",
+      "Computer Applications",
+      "Environmental Studies",
+      "Compiler Design",
+    ],
+  };
   return (
     <>
-      <div
-        className="fcc container"
-        style={{
-          // position
-          height: 50,
-          backgroundColor: "white",
-          // bottom border
-          borderBottomWidth: 1,
-          borderBottomColor: "var(--darkBg)",
-          borderStyle: "solid",
-          paddingInline: 30,
-        }}
-      >
+      <div id="whiteBar" className="fcc container whiteBar">
         {/* content */}
         <div
           className="frcsb regu14"
@@ -101,19 +184,27 @@ const WhiteBar = () => {
             height: "inherit",
           }}
         >
-          {departItems &&
-            Object.keys(departItems).map(
-              (item, i) => (
-                // departItems[key]?.map((item, i) => (
-                <button
-                  key={item + i}
-                  className="regu14 popi notSelectColor caps whiteBarItem"
-                >
-                  {item}
-                </button>
-              )
-              // ))
-            )}
+          {arrType[props.sort]?.map(
+            (item, i) => (
+              // departItems[key]?.map((item, i) => (
+              <button
+                ref={props.whiteBarRef.current[i]}
+                key={new Date().getMilliseconds() + i}
+                className="regu14 popi caps"
+                onClick={() => {
+                  // console.log(props.reff.current[i].current);
+                  props.reff.current[i].current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "nearest",
+                  });
+                }}
+              >
+                {item}
+              </button>
+            )
+            // ))
+          )}
         </div>
       </div>
     </>

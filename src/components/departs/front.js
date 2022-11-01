@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { AlphaFilter, Path } from "../../screens/ScreenLists";
 import styles from "../../static/css/front.module.css";
 import IconArrowDown from "../../static/icons/IconArrowDown";
@@ -38,16 +37,10 @@ export const Front2 = (props) => {
 };
 
 const Front = (props) => {
-  const [searchParams] = useSearchParams();
-  // console.log(searchParams.get("type"),searchParams.get("sort"), "search params");
-
+  // console.log(searchParams.get("props.type"),searchParams.get("sort"), "search params");
   const [filter, setFilter] = useState(null);
-  const [type, setType] = useState(
-    searchParams.get("type") || "Research Papers"
-  );
   const typeOpts = ["Research Papers", "Authors"];
-  const sortOpts = ["Departments", "Date"];
-  const [sort, setSort] = useState(searchParams.get("sort") || "Departments");
+  const sortOpts = ["Departments", "Date","Subjects"];
   return (
     <>
       <div
@@ -76,14 +69,14 @@ const Front = (props) => {
             <div className="frc mt60" style={{ gap: 15 }}>
               <h3>Discover</h3>
               <UnderlinedText
-                value={type}
-                setValue={setType}
+                value={props.type}
+                setValue={props.setType}
                 options={typeOpts}
               />
               <h3>based on</h3>
               <UnderlinedText
-                value={sort}
-                setValue={setSort}
+                value={props.sort}
+                setValue={props.setSort}
                 options={sortOpts}
               />
             </div>
@@ -100,7 +93,7 @@ const Front = (props) => {
             height={264}
             alt={"illustration"}
             src={require(`../../static/images/${
-              type === "Authors" ? "authors.png" : "researchPaper.png"
+              props.type === "Authors" ? "authors.png" : "researchPaper.png"
             }`)}
           />
         </div>

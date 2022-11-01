@@ -80,9 +80,9 @@ export default LeftMenu;
 export const topLinks = [
   { name: "Departments", href: paths.collections() },
   { name: "Test1", href: paths.collectionList("Test1") },
-  { name: "Link name", href: "/" },
-  { name: "Link name", href: "/" },
-  { name: "Link name", href: "/" },
+  { name: "Computer Science", href: paths.collectionList("Computer Science") },
+  { name: "Law", href: paths.collectionList("Law") },
+  { name: "Compiler Design", href: paths.collectionList("Compiler Design") },
   { name: "Link name", href: "/" },
   { name: "Link name", href: "/" },
 ];

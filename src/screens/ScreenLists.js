@@ -38,7 +38,7 @@ const WhiteBar = (props) => {
         }}
       >
         <span className="notSelectColor">
-          Now showing Computer Science documents
+          Now showing {props.departName} documents
         </span>
         {props.filter && (
           <span
@@ -93,7 +93,7 @@ const Hero = () => {
           <AlphaFilter filter={filter} setFilter={setFilter} />
         </div>
       </div>
-      <WhiteBar filter={filter} setFilter={setFilter} />
+      <WhiteBar filter={filter} setFilter={setFilter} departName={departName} />
     </>
   );
 };

@@ -92,7 +92,7 @@ const Departments = () => {
           </div>
           {/* BUTTON */}
           <div className="mt40">
-            <ViewMoreBtn href={"/Departments"} />
+            <ViewMoreBtn href={paths.collections()} />
           </div>
         </div>
       </div>
