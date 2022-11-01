@@ -3,12 +3,38 @@ import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../components/common/SearchBar";
 import SideBox from "../components/common/SideBox";
 import Descrip from "../components/home/Descrip";
+import IconArrowDown from "../static/icons/IconArrowDown";
+import { useSearchParams } from "react-router-dom";
+import ProfileBox from "../components/departs/ProfileBox";
+import paths from "../paths";
 
 const ScreenLists = () => {
+  const [searchParams] = useSearchParams();
+  const [type, setType] = useState(
+    searchParams.get("type") || "Research Papers"
+  );
+
+  const { pathname } = useLocation();
+  const pathArr = pathname.split("/");
+  const [departName, setDepartName] = useState(pathArr[pathArr.length - 1].replaceAll("%20", " ")); //getting department name from path
+
+  console.log("run",pathname,departName,pathArr[pathArr.length - 1].replaceAll("%20", " "),pathArr,type,"get",searchParams.get("type") );
+
+
+  // useEffect(() => {
+  //   setDepartName(pathArr[pathArr.length - 1].replaceAll("%20", " "));
+  //   setType(searchParams.get("type") || "Research Papers");
+  // }, [pathArr]);
   return (
     <>
-      <Hero />
-      <BelowHero />
+      <Hero
+        type={type}
+        setType={setType}
+        departName={departName}
+        setDepartName={setDepartName}
+        pathname={pathname}
+      />
+      <BelowHero type={type} />
     </>
   );
 };
@@ -38,7 +64,7 @@ const WhiteBar = (props) => {
         }}
       >
         <span className="notSelectColor">
-          Now showing {props.departName} documents
+          Now showing {props.type} in {props.departName}
         </span>
         {props.filter && (
           <span
@@ -54,10 +80,7 @@ const WhiteBar = (props) => {
   );
 };
 
-const Hero = () => {
-  const { pathname } = useLocation();
-  const pathArr = pathname.split("/");
-  const departName = pathArr[pathArr.length - 1].replaceAll("%20", " "); //getting department name from path
+const Hero = (props) => {
   const [filter, setFilter] = useState(null);
   return (
     <>
@@ -75,16 +98,26 @@ const Hero = () => {
           }}
         >
           {/* PATH */}
-          <Path pathname={pathname} />
+          <Path pathname={props.pathname} />
           {/* HEADING */}
-          <h1
-            className="caps"
-            style={{
-              marginTop: 60,
-            }}
-          >
-            {departName}
-          </h1>
+          <div className="frc" style={{ gap: 15, marginTop: 60 }}>
+            <h3 className="caps" style={{}}>
+              Find
+            </h3>
+            <UnderlinedText
+              options={["Research Papers", "Authors"]}
+              value={props.type}
+              setValue={props.setType}
+            />
+            <h3 className="caps" style={{}}>
+              in {props.departName}
+            </h3>
+            {/* <UnderlinedText
+              options={["Department","Year"]}
+              value={props.departName}
+              setValue={props.setDepartName}
+            /> */}
+          </div>
           {/* SEARCH BAR */}
           <div className="mt30">
             <SearchBar height={50} width={489} />
@@ -93,7 +126,12 @@ const Hero = () => {
           <AlphaFilter filter={filter} setFilter={setFilter} />
         </div>
       </div>
-      <WhiteBar filter={filter} setFilter={setFilter} departName={departName} />
+      <WhiteBar
+        filter={filter}
+        setFilter={setFilter}
+        departName={props.departName}
+        type={props.type}
+      />
     </>
   );
 };
@@ -141,7 +179,11 @@ export const AlphaFilter = (props) => {
             opacity: props.filter === item ? 1 : 0.7,
           }}
           onClick={() => {
-            props.setFilter(item);
+            if (props.filter === item) {
+              props.setFilter("");
+            } else {
+              props.setFilter(item);
+            }
           }}
         >
           {item}
@@ -179,24 +221,36 @@ export const Path = (props) => {
   return (
     <div className="regu12 frc mt40">
       {pathArr?.map((item, i) => [
-        
         <Link
           to={item.href}
           key={item + i}
-className="ml5"
+          className="ml5"
           onClick={() => {
             console.log(to);
           }}
           style={lastEleStyle(i)}
         >
-          <span className="wColor mr5" style={{...lastEleStyle(99),opacity:i === pathArr.length - 1?0.7:null}}>/</span>{item.name}
-        </Link>
+          <span
+            className="wColor mr5"
+            style={{
+              ...lastEleStyle(99),
+              opacity: i === pathArr.length - 1 ? 0.7 : null,
+            }}
+          >
+            /
+          </span>
+          {item.name}
+        </Link>,
       ])}
     </div>
   );
 };
 
-const BelowHero = () => {
+const BelowHero = (props) => {
+  const data = {
+    "Research Papers": papers,
+    Authors: [],
+  };
   return (
     <div className="fcc container">
       {/* CONTENT */}
@@ -204,19 +258,33 @@ const BelowHero = () => {
         style={{
           width: "100%",
           gap: 30,
+          marginBottom:80
         }}
         className="frfssb mt60"
       >
         {/* RESEARCH PAPERS */}
-        <div className="fcfs" style={{ gap: 30 }}>
-          {papers?.map((item, i) => [
-            <Descrip
-              key={item.name + i}
-              date={item.date}
-              name={item.name}
-              conference={item.conference}
-              authors={item.authors}
-            />,
+        <div className={`${props.type === "Research Papers"?"fcfs":"frc"}`} style={{ gap: props.type === "Research Papers"?30:10,flexWrap:props.type === "Research Papers"?"unset":"wrap" }}>
+          {data["Research Papers"]?.map((item, i) => [
+            props.type === "Research Papers" ? (
+              <Descrip
+                key={item.name + i}
+                date={item.date}
+                name={item.name}
+                conference={item.conference}
+                authors={item.authors}
+              />
+            ) : (
+              <ProfileBox
+                key={i+item.name}
+                info={{
+                  name: item.authors[0],
+                  post: item.conference,
+                  docs: item.authors?.length,
+                  href: paths.profile(item.authors[0]),
+                }}
+              />
+            ),
+            props.type === "Research Papers" &&
             <div
               key={item.name + new Date().getMilliseconds()}
               className="lightLine"
@@ -229,6 +297,44 @@ const BelowHero = () => {
       </div>
     </div>
   );
+};
+
+const UnderlinedText = (props) => {
+  // console.log(props.value,"val");
+  return (
+    <>
+      <div
+        style={{
+          borderBottom: "1px solid white",
+          paddingBottom: 5,
+          gap: 8,
+        }}
+        className="frc"
+      >
+        <select
+          className="caps inter oColor regu selectHover"
+          style={{ fontSize: 30, background: "none", outline: "none" }}
+          value={props.value}
+          onChange={(e) => {
+            props.setValue(e.target.value);
+          }}
+        >
+          {props.options?.map((item, i) => (
+            <option key={item + i} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <IconArrowDown />
+      </div>
+    </>
+  );
+};
+
+UnderlinedText.defaultProps = {
+  options: [],
+  value: "", //current selected option
+  setValue: () => {},
 };
 
 const papers = [

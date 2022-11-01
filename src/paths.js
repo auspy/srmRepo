@@ -1,6 +1,6 @@
 const paths={
-    collections:(type)=>type?"/Collections?type="+type:"/Collections",
-    collectionList:(list,type)=>"/Collections/"+list+(type?"?type="+type:""),
-    profile:(name)=>`/Collections/Authors/${name}`
+    collections:(sort)=>sort?"/Collections?sort="+sort:"/Collections",
+    collectionList:(collection,type)=>"/Collections/"+collection+(type?"?type="+type:""),
+    profile:(name)=>`/Authors/${name}`
 }
 export default paths

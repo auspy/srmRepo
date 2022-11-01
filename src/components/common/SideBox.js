@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { topLinks } from "../home/LeftMenu";
 
 const SideBox = (props) => {
@@ -17,7 +17,7 @@ const SideBox = (props) => {
             <div className="semi14" style={{
                 padding:"17px 0"
             }} >
-              {props.heading || "browse"}
+              {props.heading || "Quick Links"}
             </div>
             {/* line */}
             <div className="blueLine" style={{
@@ -26,8 +26,8 @@ const SideBox = (props) => {
         </div>
         {/* items */}
         {topLinks.map((item, i) => (
-          <Link
-            to={item.href}
+          <a
+            href={item.href}
             key={item + i}
             className="regu13 frc paraColor"
             style={{
@@ -37,9 +37,10 @@ const SideBox = (props) => {
               borderBottom: "1px solid var(--bg)",
               width: 290,
             }}
+            replace={true}
           >
             {item.name}
-          </Link>
+          </a>
         ))}
       </div>
     </>

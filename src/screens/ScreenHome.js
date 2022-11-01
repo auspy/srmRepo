@@ -125,8 +125,7 @@ const ViewMoreBtn = (props) => {
 export const DepartItem = (props) => {
   return (
     <>
-      <Link
-      to={props.info?.href}
+      <div
         style={{
           maxHeight: props.small ? 220 : 228,
           width: props.small ? 220 : 238,
@@ -137,7 +136,7 @@ export const DepartItem = (props) => {
         className="fcc contHover"
       >
         {/* IMAGE */}
-        <div
+        {!props.small&&<div
           style={{
             width: props.small ? 218 : 238,
             height: props.small ? 120 : 145.02,
@@ -150,7 +149,7 @@ export const DepartItem = (props) => {
             alt={"dapartment"}
             src={props.info?.img || require("../static/images/depart.png")}
           />
-        </div>
+        </div>}
         {/* TEXT */}
         <div
           className="fcc"
@@ -162,7 +161,7 @@ export const DepartItem = (props) => {
         >
           {/* <div className="fcc"> */}
           <Link
-            className="regu16 mediP caps"
+            className={` ${props.small ?"regu14 mediP":"regu16 popi"}  caps`}
             style={{ textAlign: "center" }}
             to={props.info?.href}
           >
@@ -173,10 +172,65 @@ export const DepartItem = (props) => {
           </span>
           {/* </div> */}
         </div>
-      </Link>
+      </div>
     </>
   );
 };
+// export const DepartItem = (props) => {
+//   return (
+//     <>
+//       <Link
+//       to={props.info?.href}
+//         style={{
+//           maxHeight: props.small ? 220 : 228,
+//           width: props.small ? 220 : 238,
+//           backgroundColor: "white",
+//           borderRadius: 10,
+//           border: props.small ? "1px solid var(--bg)":null,
+//         }}
+//         className="fcc contHover"
+//       >
+//         {/* IMAGE */}
+//         <div
+//           style={{
+//             width: props.small ? 218 : 238,
+//             height: props.small ? 120 : 145.02,
+//             borderRadius: props.small ? "10px 10px 0px 0px" : 10,
+//             overflow: "hidden",
+//           }}
+//         >
+//           <img
+//             width={"inherit"}
+//             alt={"dapartment"}
+//             src={props.info?.img || require("../static/images/depart.png")}
+//           />
+//         </div>
+//         {/* TEXT */}
+//         <div
+//           className="fcc"
+//           style={{
+//             height: 84,
+//             maxWidth: props.small ? 180 : 218,
+//             justifyContent: "center",
+//           }}
+//         >
+//           {/* <div className="fcc"> */}
+//           <Link
+//             className={` ${props.small ?"regu14 mediP":"regu16 popi"}  caps`}
+//             style={{ textAlign: "center" }}
+//             to={props.info?.href}
+//           >
+//             {props.info?.name || "Development Name"}
+//           </Link>
+//           <span className="light13 caps notSelectColor mt10">
+//             {props.info?.docs || "99"} Researches
+//           </span>
+//           {/* </div> */}
+//         </div>
+//       </Link>
+//     </>
+//   );
+// };
 
 // COMMON ELEMENTS
 

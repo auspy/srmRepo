@@ -12,13 +12,21 @@ const RootNavi = () => {
       {/* collections */}
       {/* type = research paper,authors, default=research papers */}
       <Route path="/Collections" element={<ScreenCollection />} />
-      <Route path="/Collections?type=:type" element={<ScreenCollection />} />
-      {/* Collection list */}
-      <Route path="/Collections/:name" element={<ScreenLists />} />
+      {/* <Route path="/Collections?type=:type" element={<ScreenCollection />} /> */}
+      {/* Research Papers */}
+      <Route path="/Collections/:collection" element={<ScreenLists />} />
+      {/* <Route path="/Collections/All" element={<ScreenLists />} /> */}
+      <Route path="/Collections/:collection?type=:type" element={<ScreenLists />} />
+
+
       {/* type will change if list is of papers or author profiles of that department/collection */}
       <Route path="/Collections/:name?type=:type&sort=:sort" element={<ScreenLists />} />
+      {/* Authors */}
+      <Route path="/Collections/:collection?type=Authors" element={<ScreenLists />} />
+
       {/* Author profile */}
-      <Route path="/Collections/Authors/:name" element={<ScreenProfile />} />
+      <Route path="/Authors/:name" element={<ScreenProfile />} />
+
 
       <Route
         path="*"

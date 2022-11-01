@@ -2,16 +2,19 @@
 import { createRef, useEffect, useRef, useState } from "react";
 import { DepartItem } from "../../screens/ScreenHome";
 
-export const Collection = (props) => {
+export const Collection = () => {
+  
   // TO GO TO TARGET HEADING
   const testRef = useRef([]);
   const whiteBarRef = useRef([]);
   testRef.current =
-    departItems &&
-    Object.keys(departItems).map((ele, i) => testRef.current[i] ?? createRef());
+    collectionData &&
+    Object.keys(collectionData).map(
+      (ele, i) => testRef.current[i] ?? createRef()
+    );
   whiteBarRef.current =
-    departItems &&
-    Object.keys(departItems).map(
+    collectionData &&
+    Object.keys(collectionData).map(
       (ele, i) => whiteBarRef.current[i] ?? createRef()
     );
 
@@ -52,13 +55,8 @@ export const Collection = (props) => {
       // console.log(distFromTop, "dis");
       if (distFromTop < -470) {
         whiteBar?.classList.add("whiteBarSticky");
-        // checkHeadingInViewport();
       } else {
         whiteBar?.classList.remove("whiteBarSticky");
-        // reset whitebar colors
-        // whiteBarRef.current.forEach((e) => {
-        //   e.current?.classList.remove("whiteBarItem");
-        // });
       }
     };
     const handleEvent = () => {
@@ -70,9 +68,14 @@ export const Collection = (props) => {
       window.removeEventListener("scroll", handleEvent);
     };
   }, [distFromTop]);
+
   return (
     <>
-      <WhiteBar whiteBarRef={whiteBarRef} reff={testRef} sort={props.sort} />
+      <WhiteBar
+        whiteBarRef={whiteBarRef}
+        reff={testRef}
+        sortHeadings={Object.keys(collectionData)}
+      />
       <div
         className="fcc"
         style={{
@@ -83,8 +86,8 @@ export const Collection = (props) => {
         }}
       >
         {/* content */}
-        {departItems &&
-          Object.keys(departItems).map((key, index) => [
+        {collectionData &&
+          Object.keys(collectionData).map((key, index) => [
             <div
               key={key + index + new Date().getSeconds()}
               className={"w100 container"}
@@ -94,7 +97,7 @@ export const Collection = (props) => {
                 <span
                   className={`regu16 mediP`}
                   style={{
-                    fontSize: 20,
+                    fontSize: 24,
                   }}
                   ref={testRef.current[index]}
                   onClick={() => {
@@ -110,7 +113,7 @@ export const Collection = (props) => {
                   }}
                 />
                 <div className={"mt10 regu13 notSelectColor lineHeight15"}>
-                  {departItems[key].desc}
+                  {collectionData[key].desc}
                 </div>
               </div>
               <div
@@ -128,10 +131,10 @@ export const Collection = (props) => {
                   gap: 22,
                 }}
               >
-                {departItems[key].items?.map((item, i) => (
+                {collectionData[key].items?.map((item, i) => (
                   <DepartItem
-                    key={item.name + i}
-                    info={{ ...item, href: item.name }}
+                    key={item + i}
+                    info={{ ...item, href: item, name: item }}
                     small={true}
                     // ref
                   />
@@ -139,7 +142,7 @@ export const Collection = (props) => {
               </div>
             </div>,
             <div
-              key={key + new Date().getMilliseconds()}
+              key={index + key + new Date().getMilliseconds()}
               className="lightLine"
             />,
           ])}
@@ -152,27 +155,7 @@ export default Collection;
 
 const WhiteBar = (props) => {
   // console.log(props);
-  const arrType = {
-    Departments: departItems && Object.keys(departItems),
-    Date: [
-      "1940-50",
-      "1950-60",
-      "1960-70",
-      "1970-80",
-      "1980-90",
-      "1990-2000",
-      "2000-10",
-      "2010-20",
-      "2020-30",
-    ],
-    Subjects: [
-      "Maths",
-      "Operating System",
-      "Computer Applications",
-      "Environmental Studies",
-      "Compiler Design",
-    ],
-  };
+
   return (
     <>
       <div id="whiteBar" className="fcc container whiteBar">
@@ -184,7 +167,7 @@ const WhiteBar = (props) => {
             height: "inherit",
           }}
         >
-          {arrType[props.sort]?.map(
+          {props.sortHeadings?.map(
             (item, i) => (
               // departItems[key]?.map((item, i) => (
               <button
@@ -221,14 +204,13 @@ const WhiteBar = (props) => {
 // }
 
 export const departItems = {
-  "Computer Science Engineering": {
+  Chemistry: {
     items: [
       { name: "Test1" },
       { name: "Test2" },
       { name: "Test3" },
       { name: "Test4" },
       { name: "Test14" },
-      { name: "Test24" },
     ],
   },
   Law: {
@@ -257,7 +239,21 @@ the internet, academic work and for local network access. In
 addition to this, University has fully equipped R&D/Project Labs
 with Softwares and Development tools.`,
   },
-  "Mechanical Engineering": {
+  Maths: {
+    items: [
+      { name: "Test1" },
+      { name: "Test2" },
+      { name: "Test3" },
+      { name: "Test4" },
+      { name: "Test24" },
+    ],
+    desc: `The information technology computer labs with more than 200
+computers connected with LAN using switches and two servers for
+the internet, academic work and for local network access. In
+addition to this, University has fully equipped R&D/Project Labs
+with Softwares and Development tools.`,
+  },
+  Physics: {
     items: [
       { name: "Test1" },
       { name: "Test2" },
@@ -272,30 +268,8 @@ the internet, academic work and for local network access. In
 addition to this, University has fully equipped R&D/Project Labs
 with Softwares and Development tools.`,
   },
-  "Civil Engineering": {
-    items: [
-      { name: "Test1" },
-      { name: "Test2" },
-      { name: "Test3" },
-      { name: "Test4" },
-      { name: "Test14" },
-      { name: "Test24" },
-    ],
-    desc: `The information technology computer labs with more than 200
-computers connected with LAN using switches and two servers for
-the internet, academic work and for local network access. In
-addition to this, University has fully equipped R&D/Project Labs
-with Softwares and Development tools.`,
-  },
-  "Electrical Engineering": {
-    items: [
-      { name: "Test1" },
-      { name: "Test2" },
-      { name: "Test3" },
-      { name: "Test4" },
-      { name: "Test14" },
-      { name: "Test24" },
-    ],
+  Commerce: {
+    items: [{ name: "Test1" }, { name: "Test2" }, { name: "Test3" }],
     desc: `The information technology computer labs with more than 200
 computers connected with LAN using switches and two servers for
 the internet, academic work and for local network access. In
@@ -305,8 +279,6 @@ with Softwares and Development tools.`,
   "Hotel Management": {
     items: [
       { name: "Test1" },
-      { name: "Test2" },
-      { name: "Test3" },
       { name: "Test4" },
       { name: "Test14" },
       { name: "Test24" },
@@ -318,3 +290,44 @@ addition to this, University has fully equipped R&D/Project Labs
 with Softwares and Development tools.`,
   },
 };
+
+  // DATA
+  const collectionData = {
+    Engineering: {
+      items: ["Mechanical", "Civil", "Electrical", "Computer Science"],
+      desc: `The information technology computer labs with more than 200
+      computers connected with LAN using switches and two servers for
+      the internet, academic work and for local network access. In
+      addition to this, University has fully equipped R&D/Project Labs
+      with Softwares and Development tools.`,
+    },
+    "Other Departments": { items: departItems && Object.keys(departItems), desc: "" },
+    Author: { items: departItems && Object.keys(departItems), desc: "" },
+    Teacher: { items: departItems && Object.keys(departItems), desc: "" },
+    Student: { items: departItems && Object.keys(departItems), desc: "" },
+    Year: {
+      items: [
+        "1940-50",
+        "1950-60",
+        "1960-70",
+        "1970-80",
+        "1980-90",
+        "1990-2000",
+        "2000-10",
+        "2010-20",
+        "2020-30",
+      ],
+      desc: "",
+    },
+    Subject: {
+      items: [
+        "Maths",
+        "Operating System",
+        "Computer Applications",
+        "Environmental Studies",
+        "Compiler Design",
+      ],
+      desc: "",
+    },
+  };
+  export const collections=Object.keys(collectionData)

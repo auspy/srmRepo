@@ -84,9 +84,10 @@ const Header = () => {
 export default Header;
 
 const menuItems = [
-  { name: "Latest Updates", href: "/" },
-  { name: "Authors", href: paths.collections("Authors") },
-  { name: "Research Papers", href: "/" },
+  // { name: "Latest Updates", href: "/" },
+  // { name: "Authors", href: paths.collectionList("All","Authors") },
+  // { name: "Research Papers", href:  paths.collectionList("All") },
+  { name: "Discover", href: paths.collections()},
   { name: "About SRM", href: "https://srmuniversity.ac.in/welcome-to-srm/" },
   { name: "Visit SRM Website", href: "https://srmuniversity.ac.in/" },
 ];

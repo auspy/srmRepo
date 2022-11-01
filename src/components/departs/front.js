@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AlphaFilter, Path } from "../../screens/ScreenLists";
 import styles from "../../static/css/front.module.css";
-import IconArrowDown from "../../static/icons/IconArrowDown";
 import SearchBar from "../common/SearchBar";
 
 export const Front2 = (props) => {
@@ -39,14 +38,14 @@ export const Front2 = (props) => {
 const Front = (props) => {
   // console.log(searchParams.get("props.type"),searchParams.get("sort"), "search params");
   const [filter, setFilter] = useState(null);
-  const typeOpts = ["Research Papers", "Authors"];
-  const sortOpts = ["Departments", "Date","Subjects"];
+  // const typeOpts = ["Research Papers", "Authors"];
+  // console.log(props.sort);
   return (
     <>
       <div
         className="bgSrmBlue fcc container"
         style={{
-          height: 397,
+          height:470,
         }}
       >
         {/* CONTENT */}
@@ -66,22 +65,11 @@ const Front = (props) => {
             {/* PATH */}
             <Path pathname={props.pathname} />
             {/* HEADING */}
-            <div className="frc mt60" style={{ gap: 15 }}>
-              <h3>Discover</h3>
-              <UnderlinedText
-                value={props.type}
-                setValue={props.setType}
-                options={typeOpts}
-              />
-              <h3>based on</h3>
-              <UnderlinedText
-                value={props.sort}
-                setValue={props.setSort}
-                options={sortOpts}
-              />
+            <div className="frc mt60 caps" style={{ gap: 15 }}>
+              <h1>Discover</h1>
             </div>
             {/* SEARCH BAR */}
-            <div className="mt40">
+            <div className="mt30">
               <SearchBar height={50} width={489} />
             </div>
             {/* FILTER SHORTCUTS */}
@@ -104,33 +92,3 @@ const Front = (props) => {
 
 export default Front;
 
-const UnderlinedText = (props) => {
-  return (
-    <>
-      <div
-        style={{
-          borderBottom: "1px solid white",
-          paddingBottom: 5,
-          gap: 8,
-        }}
-        className="frc"
-      >
-        <select
-          className="caps inter oColor regu selectHover"
-          style={{ fontSize: 30, background: "none", outline: "none" }}
-          value={props.value}
-          onChange={(e) => {
-            props.setValue(e.target.value);
-          }}
-        >
-          {props.options?.map((item, i) => (
-            <option key={item + i} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-        <IconArrowDown />
-      </div>
-    </>
-  );
-};

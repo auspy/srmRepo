@@ -219,6 +219,10 @@ a:hover,
   opacity: 1;
 }
 
+.contHover:hover a{
+  color: var(--lightBlue);
+}
+
 /* COMMON CONTAINER */
 .container {
   box-sizing: border-box;
@@ -301,4 +305,43 @@ select {
 .whiteBarSticky button:hover {
   border-bottom: 1px solid  var(--orange);
   /* color: white !important; */
+}
+
+/* SLIDING ANIMATION TEXT */
+#scrollText {
+  /* text-align: right; */
+
+  /* animation properties */
+  -moz-transform: translateX(-5%);
+  -webkit-transform: translateX(-5%);
+  transform: translateX(-5%);
+  
+  -moz-animation: my-animation 22s linear infinite;
+  -webkit-animation: my-animation 22s linear infinite;
+  animation: my-animation 22s linear infinite;
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+  from { -moz-transform: translateX(-5%); }
+  to { -moz-transform: translateX(100%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+  from { -webkit-transform: translateX(-5%); }
+  to { -webkit-transform: translateX(100%); }
+}
+
+@keyframes my-animation {
+  from {
+    -moz-transform: translateX(-5%);
+    -webkit-transform: translateX(-5%);
+    transform: translateX(-5%);
+  }
+  to {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
 }
