@@ -5,7 +5,7 @@ const SubHeader = () => {
   // CONDITIONS
   const pages = ["Collections"];
   const pathArr = pathname?.split("/");
-  const headerColorCond = pages.some((item) => pathArr?.includes(item));
+  const headerColorCond = pages.some((item) => pathArr?.includes(item)&&pathArr.length<4);
   return (
     <div
       className={`aPosi frc container`}

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Descrip from "../components/home/Descrip";
 import LeftMenu from "../components/home/LeftMenu";
@@ -131,25 +132,27 @@ export const DepartItem = (props) => {
           width: props.small ? 220 : 238,
           backgroundColor: "white",
           borderRadius: 10,
-          border: props.small ? "1px solid var(--bg)":null,
+          border: props.small ? "1px solid var(--bg)" : null,
         }}
         className="fcc contHover"
       >
         {/* IMAGE */}
-        {!props.small&&<div
-          style={{
-            width: props.small ? 218 : 238,
-            height: props.small ? 120 : 145.02,
-            borderRadius: props.small ? "10px 10px 0px 0px" : 10,
-            overflow: "hidden",
-          }}
-        >
-          <img
-            width={"inherit"}
-            alt={"dapartment"}
-            src={props.info?.img || require("../static/images/depart.png")}
-          />
-        </div>}
+        {!props.small && (
+          <div
+            style={{
+              width: props.small ? 218 : 238,
+              height: props.small ? 120 : 145.02,
+              borderRadius: props.small ? "10px 10px 0px 0px" : 10,
+              overflow: "hidden",
+            }}
+          >
+            <img
+              width={"inherit"}
+              alt={"dapartment"}
+              src={props.info?.img || require("../static/images/depart.png")}
+            />
+          </div>
+        )}
         {/* TEXT */}
         <div
           className="fcc"
@@ -161,7 +164,7 @@ export const DepartItem = (props) => {
         >
           {/* <div className="fcc"> */}
           <Link
-            className={` ${props.small ?"regu14 mediP":"regu16 popi"}  caps`}
+            className={` ${props.small ? "regu14 mediP" : "regu16 popi"}  caps`}
             style={{ textAlign: "center" }}
             to={props.info?.href}
           >
@@ -388,14 +391,30 @@ const TopContriItem = (props) => {
 
 // PDF VIEW ELEMENTS
 
-const pdf = [
-  { name: 1 },
-  { name: 1, select: true, href: "/" },
-  { name: 1 },
-  { name: 1 },
-  { name: 1 },
-];
 const PdfView = () => {
+  const pdf = [
+    {
+      name: "Non-preemptive Scheduling",
+      img: require("../static/images/pdf.png"),
+      conference: "operating systm",
+      author: ["Cowan", "Nicolas B.", "Agol", "Eric"],
+    },
+    {
+      name: "Alien Maps of an Ocean-Bearing World",
+      select: true,
+      href: "/",
+      img: require("../static/images/pdf2.png"),
+      conference: "COA",
+      author: ["Cowan", "Nicolas B.", "Agol", "Eric"],
+    },
+    {
+      name: "Integrals in mathematics",
+      img: require("../static/images/pdf3.png"),
+      conference: "Mathematics",
+      author: ["Cowan", "Nicolas B.", "Agol", "Eric"],
+    },
+  ];
+
   const bgBoxesStyle = {
     position: "relative",
     width: 224,
@@ -404,6 +423,24 @@ const PdfView = () => {
     backgroundColor: "var(--border)",
     filter: "drop-shadow(0px 10px 30px rgba(51, 51, 51, 0.16))",
   };
+
+  const [img, setImg] = useState(1);
+  
+  // to change in pdf with time
+  const imgRef = useRef(img); 
+  useEffect(() => {
+    const pdfChange = setInterval(() => {
+      imgRef.current += 1;
+      if (imgRef.current === pdf.length) {
+        setImg(0);
+        imgRef.current = img;
+      } else {
+        setImg(imgRef.current);
+      }
+    }, 2000);
+    return () => clearInterval(pdfChange);
+  }, [img, pdf.length]);
+
   return (
     <>
       <div
@@ -430,7 +467,7 @@ const PdfView = () => {
               className="frc"
             >
               <img
-                src={require("../static/images/pdf.png")}
+                src={pdf[img]?.img}
                 style={{
                   width: "100%",
                 }}
@@ -451,7 +488,7 @@ const PdfView = () => {
               }}
             >
               <img
-                src={require("../static/images/pdf.png")}
+                src={pdf[img]?.img}
                 style={{
                   width: "100%",
                 }}
@@ -468,7 +505,7 @@ const PdfView = () => {
               }}
             >
               <img
-                src={require("../static/images/pdf.png")}
+                src={pdf[img]?.img}
                 style={{
                   width: "100%",
                 }}
@@ -479,25 +516,62 @@ const PdfView = () => {
           {/* DESCRIPTION */}
 
           <div style={{ width: 775, alignSelf: "center" }}>
-            <Descrip />
+            <Descrip
+              conference={pdf[img]?.conference}
+              name={pdf[img]?.name}
+              author={pdf[img]?.author}
+              href={"/"}
+            />
           </div>
           {/* BULLETS */}
           <div className="gcc mt30">
             <div className="frc">
+              <button
+                className="mr10"
+                onClick={() => {
+                  if (img === 0) {
+                    setImg(pdf.length - 1);
+                  } else {
+                    setImg(img - 1);
+                  }
+                }}
+              >
+                {/* <IconArrowDown /> */}
+                <div className="regu16 frc notSelectColor popi">{"<"}</div>
+              </button>
               {pdf?.map((item, i) => (
-                <div
+                <button
+                  onClick={() => {
+                    setImg(i);
+                  }}
                   key={item + i}
                   style={{
                     height: 8,
                     width: 8,
                     borderRadius: 10,
                     marginRight: i === pdf.length - 1 ? 0 : 14,
-                    backgroundColor: item.select
-                      ? "var(--srmBlue)"
-                      : "var(--border)",
+                    backgroundColor:
+                      img === i ? "var(--srmBlue)" : "var(--border)",
                   }}
                 />
               ))}
+              <button
+                className="ml10"
+                onClick={() => {
+                  if (img === pdf.length - 1) {
+                    setImg(0);
+                  } else {
+                    setImg(img + 1);
+                  }
+                }}
+              >
+                <div
+                  className="regu16 frc notSelectColor popi"
+                  // style={{ color: "var(--border)" }}
+                >
+                  {">"}
+                </div>
+              </button>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ const ScreenLists = () => {
         setDepartName={setDepartName}
         pathname={pathname}
       />
-      <BelowHero type={type} />
+      <BelowHero type={type} departName={departName} />
     </>
   );
 };
@@ -213,7 +213,7 @@ export const Path = (props) => {
         }
       : {
           fontStyle: "italic",
-          color: "white",
+          color: props.textColor||"white",
           opacity: 0.7,
           textDecoration: null,
           fontWeight: null,
@@ -280,7 +280,7 @@ const BelowHero = (props) => {
                   name: item.authors[0],
                   post: item.conference,
                   docs: item.authors?.length,
-                  href: paths.profile(item.authors[0]),
+                  href: paths.profile(props.departName,item.authors[0]),
                 }}
               />
             ),
@@ -337,7 +337,7 @@ UnderlinedText.defaultProps = {
   setValue: () => {},
 };
 
-const papers = [
+export const papers = [
   {
     name: "Alien Maps of an Ocean-Bearing World ﻿",
     date: "11 October 2019",

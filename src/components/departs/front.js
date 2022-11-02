@@ -1,39 +1,39 @@
 import { useState } from "react";
 import { AlphaFilter, Path } from "../../screens/ScreenLists";
-import styles from "../../static/css/front.module.css";
+// import styles from "../../static/css/front.module.css";
 import SearchBar from "../common/SearchBar";
 
-export const Front2 = (props) => {
-  return (
-    <div className={styles.maintag}>
-      <div className={styles.info}>
-        <div className={styles.infocontainer}>
-          <h1 className={styles.heading}>{props.heading}</h1>
-          <div className={styles.infomaterial}>
-            The library at SRM University is stocked with a large numbers of
-            books, magazines, Indian & International Journals, online Journals
-            and other online resources supporting all aspects of studies and
-            research. There are multiple institutional libraries apart from a
-            large Central Library with acts as a learning resource hub for the
-            students & faculty members.<br></br>
-            The library at SRM University is stocked with a large numbers of
-            books, magazines, Indian & International Journals, online Journals
-            and other online resources supporting all aspects of studies and
-            research. There are multiple institutional libraries apart from.
-          </div>
-        </div>
-      </div>
+// export const Front2 = (props) => {
+//   return (
+//     <div className={styles.maintag}>
+//       <div className={styles.info}>
+//         <div className={styles.infocontainer}>
+//           <h1 className={styles.heading}>{props.heading}</h1>
+//           <div className={styles.infomaterial}>
+//             The library at SRM University is stocked with a large numbers of
+//             books, magazines, Indian & International Journals, online Journals
+//             and other online resources supporting all aspects of studies and
+//             research. There are multiple institutional libraries apart from a
+//             large Central Library with acts as a learning resource hub for the
+//             students & faculty members.<br></br>
+//             The library at SRM University is stocked with a large numbers of
+//             books, magazines, Indian & International Journals, online Journals
+//             and other online resources supporting all aspects of studies and
+//             research. There are multiple institutional libraries apart from.
+//           </div>
+//         </div>
+//       </div>
 
-      <div className={styles.img}>
-        <img
-          className={styles.image}
-          src="https://i.pinimg.com/564x/ac/96/b2/ac96b26be485f8a63d9ffae54a3b9596.jpg"
-          alt="ERROR"
-        />
-      </div>
-    </div>
-  );
-};
+//       <div className={styles.img}>
+//         <img
+//           className={styles.image}
+//           src="https://i.pinimg.com/564x/ac/96/b2/ac96b26be485f8a63d9ffae54a3b9596.jpg"
+//           alt="ERROR"
+//         />
+//       </div>
+//     </div>
+//   );
+// };
 
 const Front = (props) => {
   // console.log(searchParams.get("props.type"),searchParams.get("sort"), "search params");
@@ -45,7 +45,7 @@ const Front = (props) => {
       <div
         className="bgSrmBlue fcc container"
         style={{
-          height:470,
+          height:389,
         }}
       >
         {/* CONTENT */}

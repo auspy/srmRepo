@@ -157,6 +157,9 @@ button {
 .mr5 {
   margin-right: 5px;
 }
+.mr10 {
+  margin-right: 10px;
+}
 /* bottom */
 .mb20 {
   margin-bottom: 20px;
@@ -204,6 +207,9 @@ button {
 /* left */
 .ml15 {
   margin-left: 15px;
+}
+.ml10 {
+  margin-left: 10px;
 }
 .ml5 {
   margin-left: 5px;
