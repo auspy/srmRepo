@@ -5,7 +5,7 @@ import SubHeader from "./components/SubHeader";
 import RootNavi from "./navigation/RootNavi";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-
+// test psuh
 function App() {
   const { pathname } = useLocation();
 
