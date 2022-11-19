@@ -285,22 +285,87 @@ const HomeHeading = (props) => {
 };
 
 // TOP CONTRI ELEMENTS
-
-const topContri = [
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
-  {
-    name: "Anjali Mehta is here",
-    post: "assistant professor wow is she",
-    docs: 46123131231,
-    href: "/",
-  },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
-  { name: "Anjali Mehta", post: "assistant professor", docs: 46, href: "/" },
-];
+// const topContr = [
+//   {
+//     name: "Anjali Mehta",
+//     post: "assistant professor",
+//     citations: 46,
+//     href: "/",
+//   },
+//   {
+//     name: "Anjali Mehta",
+//     post: "assistant professor",
+//     citations: 46,
+//     href: "/",
+//   },
+//   {
+//     name: "Anjali Mehta",
+//     post: "assistant professor",
+//     citations: 46,
+//     href: "/",
+//   },
+//   {
+//     name: "Anjali Mehta is here",
+//     post: "assistant professor wow is she",
+//     citations: 46123131231,
+//     href: "/",
+//   },
+//   {
+//     name: "Anjali Mehta",
+//     post: "assistant professor",
+//     citations: 46,
+//     href: "/",
+//   },
+//   {
+//     name: "Anjali Mehta",
+//     post: "assistant professor",
+//     citations: 46,
+//     href: "/",
+//   },
+// ];
 
 const TopContri = () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const [topContri, setTopCont] = useState([]);
+
+  useEffect(() => {
+    const test = async () => {
+      const urlcitation = "http://127.0.0.1:7780" + "/citation";
+
+      const res = await fetch(urlcitation, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        redirect: "follow",
+      });
+
+      const data = await res.json();
+
+      // console.log(data.message);
+      const author = data.message;
+      console.log(author, data.message);
+      const arr = [];
+      author.forEach((item) => {
+        // console.log(item,"item");
+        arr.push({
+          citations: item["citations"],
+          name: item["author"]["name"],
+          post: item["author"]["post"],
+          href: `/Collections/${item["author"]["department"]}/${item["author"]["name"]}?id=${item["author"]["_id"]}`,
+          img:item["author"]["profilepic"],
+        });
+      });
+      setTopCont(arr);
+
+      // return ""
+    };
+    return () => {
+      test();
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -329,7 +394,7 @@ const TopContri = () => {
             {topContri?.map((item, i) => (
               <TopContriItem
                 key={item + i}
-                info={{ ...item, href: paths.profile(item.name) }}
+                info={{ ...item }}
               />
             ))}
           </div>
@@ -359,13 +424,26 @@ const TopContriItem = (props) => {
           style={{
             height: "100%",
             width: "100%",
+            // borderRadius:100,
+            // overflow:"hidden",
           }}
         >
+          <div className="gcc"
+            style={{
+              width: 114,
+              height: 114,
+              borderRadius: 80,
+              overflow:"hidden",
+              // background: "#52BAD7",
+              // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+            }}>
           <img
             src={props.info?.img || require("../static/images/contri.png")}
-            height={114}
+            // height={114}
+            width={"100%"}
             alt="contributor"
           />
+          </div>
           <div className="fcfssb ml30" style={{ height: "inherit" }}>
             <div className="fcfs">
               <Link
@@ -380,7 +458,7 @@ const TopContriItem = (props) => {
               </span>
             </div>
             <span className="light13 notSelectColor mt5">
-              {props.info?.docs + " Researches"}
+              {props.info?.citations + " Citations"}
             </span>
           </div>
         </div>
@@ -425,9 +503,9 @@ const PdfView = () => {
   };
 
   const [img, setImg] = useState(1);
-  
+
   // to change in pdf with time
-  const imgRef = useRef(img); 
+  const imgRef = useRef(img);
   useEffect(() => {
     const pdfChange = setInterval(() => {
       imgRef.current += 1;

@@ -2,20 +2,22 @@ import React from "react";
 import { Path } from "../../screens/ScreenLists";
 
 const ProfileHero = (props) => {
-  const user = {
-    img: require("../../static/images/contri.png"),
-    name: "Tarak Mehta",
-    post: "Assistant Professor",
-    details: {
-      department: "cse",
-      papers: 56,
-      grade: "ultra pro max",
-      education: {
-        BTech: "IIT Mumbai",
-        MTech: "IIT Delhi",
-      },
-    },
-  };
+  console.log(props.user,"data is here");
+  const user = props.user||{}
+  // const user = {
+  //   img: require("../../static/images/contri.png"),
+  //   name: "Tarak Mehta",
+  //   post: "Assistant Professor",
+  //   details: {
+  //     department: "cse",
+  //     papers: 56,
+  //     grade: "ultra pro max",
+  //     education: {
+  //       BTech: "IIT Mumbai",
+  //       MTech: "IIT Delhi",
+  //     },
+  //   },
+  // };
   return (
     <>
       <div
@@ -43,11 +45,16 @@ const ProfileHero = (props) => {
               width: 144,
               height: 144,
               borderRadius: 80,
+              overflow:"hidden",
               background: "#52BAD7",
               boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <img src={user.img} alt="profile" height={138} />
+            <img src={user.img} alt="profile" width={"100%"} 
+            // style={{
+            //   justifySelf:"center"
+            // }} 
+            />
           </div>
           {/* DESCRIPTION */}
           <div className="">

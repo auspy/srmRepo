@@ -25,6 +25,7 @@ const RootNavi = () => {
 
       {/* Author profile */}
       <Route path="/Collections/:collection/:name" element={<ScreenProfile />} />
+      <Route path="/Collections/:collection/:name?id=:id" element={<ScreenProfile />} />
 
 
       <Route

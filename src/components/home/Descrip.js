@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Descrip = (props) => {
   return (
@@ -12,11 +12,11 @@ const Descrip = (props) => {
           marginBottom: 5,
         }}
       />
-      <Link className="semi16 frc bColor" to={props.href}>
+      <a className="semi16 frc bColor" href={props.href}>
         {props.name}
-      </Link>
+      </a>
       <span className="regu13 frc notSelectColor mt5">
-        {props.author?.join(", ")}
+        {props.authors?.join(", ")}
       </span>
       {props.date && (
         <div
