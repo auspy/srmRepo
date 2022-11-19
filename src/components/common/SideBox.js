@@ -37,7 +37,7 @@ const SideBox = (props) => {
               borderBottom: "1px solid var(--bg)",
               width: 290,
             }}
-            replace={true}
+            // replace={true}
           >
             {item.name}
           </a>

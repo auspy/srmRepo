@@ -14,16 +14,24 @@ const ProfileBox = (props) => {
         boxSizing: "border-box",
       }}
     >
-      <div
-        className="fcc"
-        style={{
-        }}
-      >
-        <img
-          src={props.info?.img || require("../../static/images/contri.png")}
-          height={88}
-          alt="contributor"
-        />
+      <div className="fcc" style={{}}>
+        <div
+          className="gcc"
+          style={{
+            width: 88,
+            height: 88,
+            borderRadius: 80,
+            overflow: "hidden",
+            // background: "#52BAD7",
+            // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <img
+            src={props.info?.img || require("../../static/images/contri.png")}
+            width={"100%"}
+            alt="contributor"
+          />
+        </div>
         {/* <div className="fcfssb ml30" style={{ height: "inherit" }}> */}
         {/* <div className="fcfs"> */}
         <Link

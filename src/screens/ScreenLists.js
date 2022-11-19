@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "../components/common/SearchBar";
 import SideBox from "../components/common/SideBox";
@@ -6,7 +6,6 @@ import Descrip from "../components/home/Descrip";
 import IconArrowDown from "../static/icons/IconArrowDown";
 import { useSearchParams } from "react-router-dom";
 import ProfileBox from "../components/departs/ProfileBox";
-import paths from "../paths";
 
 const ScreenLists = () => {
   const [searchParams] = useSearchParams();
@@ -16,10 +15,63 @@ const ScreenLists = () => {
 
   const { pathname } = useLocation();
   const pathArr = pathname.split("/");
-  const [departName, setDepartName] = useState(pathArr[pathArr.length - 1].replaceAll("%20", " ")); //getting department name from path
+  const [departName, setDepartName] = useState(
+    pathArr[pathArr.length - 1].replaceAll("%20", " ")
+  ); //getting department name from path
 
-  console.log("run",pathname,departName,pathArr[pathArr.length - 1].replaceAll("%20", " "),pathArr,type,"get",searchParams.get("type") );
+  const [paperData, setPapersData] = useState([]);
+  const [paperData2, setPapersData2] = useState([]);
+  //  get research papers based on departName/collection
 
+  const callaboutPage = async (type) => {
+    try {
+      console.log(type, departName, "inside");
+      // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
+      const url = "http://127.0.0.1:7780" + `/department?id=${departName}`;
+      // const urlAuthors = "http://127.0.0.1:7780" + "/authors";
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        redirect: "follow",
+      });
+
+      const data = await res.json();
+      const msg = data.message;
+      console.log(data, "wowo");
+      const papers = [];
+      msg?.forEach((item, i) => {
+        papers.push(...item.papers);
+      });
+      // console.log();
+
+      setPapersData(papers); //research appers
+      setPapersData2(msg); //authors
+
+      if (!res.status === 200) {
+        console.log("Errr");
+      }
+    } catch (e) {}
+  };
+  useEffect(() => {
+    // console.log(type, "type");
+    callaboutPage(type);
+  }, []);
+  // data recieved
+  // send to belowhero
+  // console.log(
+  //   "run",
+  //   pathname,
+  //   departName,
+  //   pathArr[pathArr.length - 1].replaceAll("%20", " "),
+  //   pathArr,
+  //   type,
+  //   "get",
+  //   searchParams.get("type")
+  // );
 
   // useEffect(() => {
   //   setDepartName(pathArr[pathArr.length - 1].replaceAll("%20", " "));
@@ -34,7 +86,11 @@ const ScreenLists = () => {
         setDepartName={setDepartName}
         pathname={pathname}
       />
-      <BelowHero type={type} departName={departName} />
+      <BelowHero
+        type={type}
+        departName={departName}
+        papers={[paperData, paperData2]}
+      />
     </>
   );
 };
@@ -213,7 +269,7 @@ export const Path = (props) => {
         }
       : {
           fontStyle: "italic",
-          color: props.textColor||"white",
+          color: props.textColor || "white",
           opacity: 0.7,
           textDecoration: null,
           fontWeight: null,
@@ -226,7 +282,7 @@ export const Path = (props) => {
           key={item + i}
           className="ml5"
           onClick={() => {
-            console.log(to);
+            // console.log(to);
           }}
           style={lastEleStyle(i)}
         >
@@ -247,10 +303,13 @@ export const Path = (props) => {
 };
 
 const BelowHero = (props) => {
+  // get research papers based on
+  console.log(props.papers, "below hero");
   const data = {
-    "Research Papers": papers,
-    Authors: [],
+    "Research Papers": props.papers[0],
+    Authors: props.papers[1],
   };
+
   return (
     <div className="fcc container">
       {/* CONTENT */}
@@ -258,37 +317,45 @@ const BelowHero = (props) => {
         style={{
           width: "100%",
           gap: 30,
-          marginBottom:80
+          marginBottom: 80,
         }}
         className="frfssb mt60"
       >
         {/* RESEARCH PAPERS */}
-        <div className={`${props.type === "Research Papers"?"fcfs":"frc"}`} style={{ gap: props.type === "Research Papers"?30:10,flexWrap:props.type === "Research Papers"?"unset":"wrap" }}>
-          {data["Research Papers"]?.map((item, i) => [
+        <div
+          className={`${props.type === "Research Papers" ? "fcfs" : "frc"}`}
+          style={{
+            gap: props.type === "Research Papers" ? 30 : 10,
+            flexWrap: props.type === "Research Papers" ? "unset" : "wrap",
+          }}
+        >
+          {data[props.type]?.map((item, i) => [
             props.type === "Research Papers" ? (
               <Descrip
-                key={item.name + i}
-                date={item.date}
-                name={item.name}
-                conference={item.conference}
-                authors={item.authors}
+                key={item.tittle + i}
+                date={item.publishyear}
+                name={item.tittle}
+                conference={item.journalname}
+                authors={item.author}
               />
             ) : (
               <ProfileBox
-                key={i+item.name}
+                key={i + item.name}
                 info={{
-                  name: item.authors[0],
-                  post: item.conference,
-                  docs: item.authors?.length,
-                  href: paths.profile(props.departName,item.authors[0]),
+                  name: item.name,
+                  post: item.post,
+                  docs: item.papers.length,
+                  href: `/Collections/${item["department"]}/${item["name"]}?id=${item["_id"]}`,
+                  img: item.profilepic,
                 }}
               />
             ),
-            props.type === "Research Papers" &&
-            <div
-              key={item.name + new Date().getMilliseconds()}
-              className="lightLine"
-            />,
+            props.type === "Research Papers" && (
+              <div
+                key={item.name + new Date().getMilliseconds()}
+                className="lightLine"
+              />
+            ),
           ])}
         </div>
 

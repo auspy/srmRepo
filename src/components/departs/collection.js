@@ -3,7 +3,41 @@ import { createRef, useEffect, useRef, useState } from "react";
 import { DepartItem } from "../../screens/ScreenHome";
 
 export const Collection = () => {
-  
+  const [interest, setInterest] = useState({ items: [], id: {} });
+  collectionData["Area Of Interest"] = { items: interest.items, desc: "", id: interest.id };
+  const callaboutPage = async () => {
+    try {
+      const url = "http://127.0.0.1:7780" + `/interest`;
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        redirect: "follow",
+      });
+
+      const data = await res.json();
+      const msg = data.message;
+      console.log(msg);
+      const arr = [];
+      const ids = {};
+      msg.forEach((item) => {
+        arr.push(item.tittle);
+        ids[item.tittle] = item._id;
+      });
+      setInterest({ items: arr, id: ids });
+      if (!res.status === 200) {
+        console.log("Errr");
+      }
+    } catch (e) {}
+  };
+  useEffect(() => {
+    // console.log(type, "type");
+    callaboutPage();
+  }, []);
+
   // TO GO TO TARGET HEADING
   const testRef = useRef([]);
   const whiteBarRef = useRef([]);
@@ -134,7 +168,14 @@ export const Collection = () => {
                 {collectionData[key].items?.map((item, i) => (
                   <DepartItem
                     key={item + i}
-                    info={{ ...item, href: item, name: item }}
+                    info={{
+                      ...item,
+                      href:
+                        item ,
+                        // + item === "Area Of Interest" ?
+                        // `?id=${collectionData[item].id[item]}`:"",
+                      name: item,
+                    }}
                     small={true}
                     // ref
                   />
@@ -291,43 +332,47 @@ with Softwares and Development tools.`,
   },
 };
 
-  // DATA
-  const collectionData = {
-    Engineering: {
-      items: ["Mechanical", "Civil", "Electrical", "Computer Science"],
-      desc: `The information technology computer labs with more than 200
+// DATA
+const collectionData = {
+  Engineering: {
+    items: ["Mechanical", "Civil", "Electrical", "Computer Science"],
+    desc: `The information technology computer labs with more than 200
       computers connected with LAN using switches and two servers for
       the internet, academic work and for local network access. In
       addition to this, University has fully equipped R&D/Project Labs
       with Softwares and Development tools.`,
-    },
-    "Other Departments": { items: departItems && Object.keys(departItems), desc: "" },
-    Author: { items: departItems && Object.keys(departItems), desc: "" },
-    Teacher: { items: departItems && Object.keys(departItems), desc: "" },
-    Student: { items: departItems && Object.keys(departItems), desc: "" },
-    Year: {
-      items: [
-        "1940-50",
-        "1950-60",
-        "1960-70",
-        "1970-80",
-        "1980-90",
-        "1990-2000",
-        "2000-10",
-        "2010-20",
-        "2020-30",
-      ],
-      desc: "",
-    },
-    Subject: {
-      items: [
-        "Maths",
-        "Operating System",
-        "Computer Applications",
-        "Environmental Studies",
-        "Compiler Design",
-      ],
-      desc: "",
-    },
-  };
-  export const collections=Object.keys(collectionData)
+  },
+  "Other Departments": {
+    items: departItems && Object.keys(departItems),
+    desc: "",
+  },
+  Author: { items: departItems && Object.keys(departItems), desc: "" },
+  Teacher: { items: departItems && Object.keys(departItems), desc: "" },
+  Student: { items: departItems && Object.keys(departItems), desc: "" },
+  Year: {
+    items: [
+      "1940-50",
+      "1950-60",
+      "1960-70",
+      "1970-80",
+      "1980-90",
+      "1990-2000",
+      "2000-10",
+      "2010-20",
+      "2020-30",
+    ],
+    desc: "",
+  },
+  "Area Of Interest": {
+    items: [
+      "Maths",
+      "Operating System",
+      "Computer Applications",
+      "Environmental Studies",
+      "Compiler Design",
+    ],
+    desc: "",
+    id:{},
+  },
+};
+export const collections = Object.keys(collectionData);
