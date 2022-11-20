@@ -6,6 +6,7 @@ import Descrip from "../components/home/Descrip";
 import IconArrowDown from "../static/icons/IconArrowDown";
 import { useSearchParams } from "react-router-dom";
 import ProfileBox from "../components/departs/ProfileBox";
+import { toCapitalise } from "../common";
 
 const ScreenLists = () => {
   const [searchParams] = useSearchParams();
@@ -21,14 +22,24 @@ const ScreenLists = () => {
 
   const [paperData, setPapersData] = useState([]);
   const [paperData2, setPapersData2] = useState([]);
+  const [resultCount, setResultCount] = useState({
+    "Research Papers": null,
+    Authors: null,
+  });
+
+  const [filter, setFilter] = useState(null);
+
   //  get research papers based on departName/collection
 
-  const callaboutPage = async (type) => {
+  const callaboutPage = async () => {
     try {
-      console.log(type, departName, "inside");
+      // console.log(type, departName, "inside");
       // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
-      const url = "http://127.0.0.1:7780" + `/department?id=${departName}`;
-      // const urlAuthors = "http://127.0.0.1:7780" + "/authors";
+      const url =
+        "http://127.0.0.1:7780" +
+        `/department?id=${departName}&departType=${
+          searchParams.get("departType") || "nice"
+        }`;
 
       const res = await fetch(url, {
         method: "GET",
@@ -41,16 +52,16 @@ const ScreenLists = () => {
 
       const data = await res.json();
       const msg = data.message;
+      const papers = data.allpaper;
       console.log(data, "wowo");
-      const papers = [];
-      msg?.forEach((item, i) => {
-        papers.push(...item.papers);
-      });
-      // console.log();
 
-      setPapersData(papers); //research appers
+      setPapersData(papers || []); //research appers
       setPapersData2(msg); //authors
-
+      // total count of items
+      setResultCount({
+        "Research Papers": papers?.length,
+        Authors: msg?.length,
+      });
       if (!res.status === 200) {
         console.log("Errr");
       }
@@ -85,11 +96,15 @@ const ScreenLists = () => {
         departName={departName}
         setDepartName={setDepartName}
         pathname={pathname}
+        resultCount={resultCount}
+        filter={filter}
+        setFilter={setFilter}
       />
       <BelowHero
         type={type}
         departName={departName}
         papers={[paperData, paperData2]}
+        filter={filter}
       />
     </>
   );
@@ -120,7 +135,8 @@ const WhiteBar = (props) => {
         }}
       >
         <span className="notSelectColor">
-          Now showing {props.type} in {props.departName}
+          Now showing {props.resultCount[props.type] || ""} {props.type} in{" "}
+          {props.departName?.toLowerCase()}
         </span>
         {props.filter && (
           <span
@@ -137,7 +153,6 @@ const WhiteBar = (props) => {
 };
 
 const Hero = (props) => {
-  const [filter, setFilter] = useState(null);
   return (
     <>
       <div
@@ -166,7 +181,7 @@ const Hero = (props) => {
               setValue={props.setType}
             />
             <h3 className="caps" style={{}}>
-              in {props.departName}
+              in {props.departName?.toLowerCase()}
             </h3>
             {/* <UnderlinedText
               options={["Department","Year"]}
@@ -179,14 +194,15 @@ const Hero = (props) => {
             <SearchBar height={50} width={489} />
           </div>
           {/* FILTER SHORTCUTS */}
-          <AlphaFilter filter={filter} setFilter={setFilter} />
+          <AlphaFilter filter={props.filter} setFilter={props.setFilter} />
         </div>
       </div>
       <WhiteBar
-        filter={filter}
-        setFilter={setFilter}
+        filter={props.filter}
+        setFilter={props.setFilter}
         departName={props.departName}
         type={props.type}
+        resultCount={props.resultCount}
       />
     </>
   );
@@ -194,7 +210,7 @@ const Hero = (props) => {
 
 export const AlphaFilter = (props) => {
   const filterArr = [
-    "0-9",
+    // "0-9",
     "A",
     "b",
     "c",
@@ -223,7 +239,7 @@ export const AlphaFilter = (props) => {
     "z",
   ];
   return (
-    <div className="mt10 frc  " style={{ color: "white" }}>
+    <div className="mt10 frc  " style={{ color: "white",gap:13.5 }}>
       {filterArr?.map((item, i) => (
         <button
           key={item + i}
@@ -231,7 +247,7 @@ export const AlphaFilter = (props) => {
             props.filter === item ? "lBColor semi" : "wColor"
           } filter`}
           style={{
-            marginLeft: i !== 0 && 12,
+            // marginLeft: i !== 0 && 12,
             opacity: props.filter === item ? 1 : 0.7,
           }}
           onClick={() => {
@@ -262,9 +278,8 @@ export const Path = (props) => {
     i === pathArr.length - 1
       ? {
           fontStyle: null,
-          color: "var(--lightBlue)",
+          color: props.headColor || "white",
           opacity: 1,
-          textDecoration: "underline",
           fontWeight: 500,
         }
       : {
@@ -295,7 +310,7 @@ export const Path = (props) => {
           >
             /
           </span>
-          {item.name}
+          {toCapitalise(item.name)}
         </Link>,
       ])}
     </div>
@@ -304,11 +319,12 @@ export const Path = (props) => {
 
 const BelowHero = (props) => {
   // get research papers based on
-  console.log(props.papers, "below hero");
+  console.log(props.papers, "here");
   const data = {
     "Research Papers": props.papers[0],
     Authors: props.papers[1],
   };
+  // console.log(data[props.type][0]?.tittle?.split("")[0], props.filter, "inf");
 
   return (
     <div className="fcc container">
@@ -329,34 +345,109 @@ const BelowHero = (props) => {
             flexWrap: props.type === "Research Papers" ? "unset" : "wrap",
           }}
         >
-          {data[props.type]?.map((item, i) => [
-            props.type === "Research Papers" ? (
-              <Descrip
-                key={item.tittle + i}
-                date={item.publishyear}
-                name={item.tittle}
-                conference={item.journalname}
-                authors={item.author}
-              />
-            ) : (
-              <ProfileBox
-                key={i + item.name}
-                info={{
-                  name: item.name,
-                  post: item.post,
-                  docs: item.papers.length,
-                  href: `/Collections/${item["department"]}/${item["name"]}?id=${item["_id"]}`,
-                  img: item.profilepic,
-                }}
-              />
-            ),
-            props.type === "Research Papers" && (
+          {/* HEADING */}
+          {props.type === "Research Papers" && (
+            <div
+              className="frcsb w100  upper regu11 popi"
+              style={{ color: "var(--notSelect)" }}
+            >
+              {/* paper */}
               <div
-                key={item.name + new Date().getMilliseconds()}
-                className="lightLine"
-              />
-            ),
-          ])}
+                style={{
+                  width: "85%",
+                }}
+              >
+                Title
+              </div>
+              {/* year */}
+              <div>Year</div>
+              {/* cited */}
+              <div>Cited By</div>
+            </div>
+          )}
+          {/* PAPERS */}
+          {data &&
+            data[props.type]?.map((item, i) => [
+              props.type === "Research Papers" ? (
+                props.filter ? (
+                  item.tittle?.split("")[0].toUpperCase() ===
+                    props.filter.toUpperCase() && (
+                    <Descrip
+                      key={item.tittle + i}
+                      date={item.publishyear}
+                      name={item.tittle}
+                      conference={item.publication}
+                      authors={item.author}
+                      cited={item.cited}
+                      href={item.link}
+                    />
+                  )
+                ) : props.filter ? (
+                  item.tittle?.split("")[0].toUpperCase() ===
+                    props.filter.toUpperCase() && (
+                    <Descrip
+                      key={item.tittle + i}
+                      date={item.publishyear}
+                      name={item.tittle}
+                      conference={item.publication}
+                      authors={item.author}
+                      cited={item.cited}
+                      href={item.link}
+                    />
+                  )
+                ) : (
+                  <Descrip
+                    key={item.tittle + i}
+                    date={item.publishyear}
+                    name={item.tittle}
+                    conference={item.publication}
+                    authors={item.author}
+                    cited={item.cited}
+                    href={item.link}
+                  />
+                )
+              ) : props.filter ? (
+                item.name?.split("")[0].toUpperCase() ===
+                  props.filter.toUpperCase() && (
+                  <ProfileBox
+                    key={i + item.name}
+                    info={{
+                      name: item.name,
+                      post: item.post,
+                      docs: item.totalpaper || "-",
+                      href: `/Collections/${item["department"]}/${item["name"]}?id=${item["_id"]}`,
+                      img: item.profilepic,
+                    }}
+                  />
+                )
+              ) : (
+                <ProfileBox
+                  key={i + item.name}
+                  info={{
+                    name: item.name,
+                    post: item.post,
+                    docs: item.totalpaper || "-",
+                    href: `/Collections/${item["department"]}/${item["name"]}?id=${item["_id"]}`,
+                    img: item.profilepic,
+                  }}
+                />
+              ),
+              props.type === "Research Papers" &&
+                (props.filter ? (
+                  item.tittle?.split("")[0].toUpperCase() ===
+                    props.filter.toUpperCase() && (
+                    <div
+                      key={item.tittle + new Date().getMilliseconds()}
+                      className="lightLine"
+                    />
+                  )
+                ) : (
+                  <div
+                    key={item.tittle + new Date().getMilliseconds()}
+                    className="lightLine"
+                  />
+                )),
+            ])}
         </div>
 
         {/* SIDE BOX */}

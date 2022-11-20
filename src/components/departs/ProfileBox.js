@@ -22,6 +22,7 @@ const ProfileBox = (props) => {
             height: 88,
             borderRadius: 80,
             overflow: "hidden",
+            alignContent: "center",
             // background: "#52BAD7",
             // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
           }}
@@ -42,7 +43,7 @@ const ProfileBox = (props) => {
           {props.info?.name || "Anjali"}
         </Link>
         <span className="light13 paraColor caps" style={{ marginTop: 7 }}>
-          {props.info?.post || "Assistant"}
+          {props.info?.post?.toLowerCase() || "Assistant"}
         </span>
         {/* </div> */}
         <div className="frc" style={{ marginTop: 20 }}>

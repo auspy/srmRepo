@@ -2,8 +2,8 @@
 
 const Descrip = (props) => {
   return (
-    <div >
-      <span className="regu10 upper frc">{props.conference}</span>
+    <div style={{ width: "100%" }}>
+      <span className="regu10 frc">{props.conference}</span>
       <div
         className="blueLine"
         style={{
@@ -12,22 +12,39 @@ const Descrip = (props) => {
           marginBottom: 5,
         }}
       />
-      <a className="semi16 frc bColor" href={props.href}>
-        {props.name}
-      </a>
+      <div className="frcsb" style={{ gap: 60 }}>
+        <a
+          className="semi16 frc bColor"
+          href={props.href}
+          style={{ width: "100%" }}
+        >
+          {props.name}
+        </a>
+        {/* {props.date && ( */}
+        <div className="frcsb" style={{width:130}}>
+          <span
+            className="regu13 hColor"
+            style={{
+              // fontStyle: "italic",
+            }}
+          >
+            {props.date||" "}
+          </span>
+                {/* )} */}
+          <span
+            className="regu13 hColor"
+            style={{
+              // fontStyle: "italic",
+            }}
+          >
+            {props.cited||"-"}
+          </span>
+        </div>
+
+      </div>
       <span className="regu13 frc notSelectColor mt5">
         {props.authors?.join(", ")}
       </span>
-      {props.date && (
-        <div
-          className="mt15 regu11 notSelectColor"
-          style={{
-            fontStyle: "italic",
-          }}
-        >
-          {props.date}
-        </div>
-      )}
     </div>
   );
 };
@@ -37,5 +54,5 @@ Descrip.defaultProps = {
   conference: "operating systm",
   name: "Alien Maps of an Ocean-Bearing World",
   author: ["Cowan", "Nicolas B.", "Agol", "Eric"],
-  href:"/"
+  href: "/",
 };

@@ -167,8 +167,9 @@ export const DepartItem = (props) => {
             className={` ${props.small ? "regu14 mediP" : "regu16 popi"}  caps`}
             style={{ textAlign: "center" }}
             to={props.info?.href}
+            onClick={()=>{console.log(props.info?.href);}}
           >
-            {props.info?.name || "Development Name"}
+            {props.info?.name?.toLowerCase() || "Development Name"}
           </Link>
           <span className="light13 caps notSelectColor mt10">
             {props.info?.docs || "99"} Researches
@@ -354,7 +355,7 @@ const TopContri = () => {
           name: item["author"]["name"],
           post: item["author"]["post"],
           href: `/Collections/${item["author"]["department"]}/${item["author"]["name"]}?id=${item["author"]["_id"]}`,
-          img:item["author"]["profilepic"],
+          img: item["author"]["profilepic"],
         });
       });
       setTopCont(arr);
@@ -392,10 +393,7 @@ const TopContri = () => {
             className={"mt40"}
           >
             {topContri?.map((item, i) => (
-              <TopContriItem
-                key={item + i}
-                info={{ ...item }}
-              />
+              <TopContriItem key={item + i} info={{ ...item }} />
             ))}
           </div>
         </div>
@@ -428,21 +426,24 @@ const TopContriItem = (props) => {
             // overflow:"hidden",
           }}
         >
-          <div className="gcc"
+          <div
+            className="gcc"
             style={{
               width: 114,
               height: 114,
               borderRadius: 80,
-              overflow:"hidden",
+              overflow: "hidden",
+              alignContent: "center",
               // background: "#52BAD7",
               // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-            }}>
-          <img
-            src={props.info?.img || require("../static/images/contri.png")}
-            // height={114}
-            width={"100%"}
-            alt="contributor"
-          />
+            }}
+          >
+            <img
+              src={props.info?.img || require("../static/images/contri.png")}
+              // height={114}
+              width={"100%"}
+              alt="contributor"
+            />
           </div>
           <div className="fcfssb ml30" style={{ height: "inherit" }}>
             <div className="fcfs">

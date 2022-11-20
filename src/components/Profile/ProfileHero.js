@@ -1,9 +1,10 @@
 import React from "react";
+import { toCapitalise } from "../../common";
 import { Path } from "../../screens/ScreenLists";
 
 const ProfileHero = (props) => {
-  console.log(props.user,"data is here");
-  const user = props.user||{}
+  // console.log(props.user,"data is here");
+  const user = props.user || {};
   // const user = {
   //   img: require("../../static/images/contri.png"),
   //   name: "Tarak Mehta",
@@ -29,7 +30,7 @@ const ProfileHero = (props) => {
           borderBottom: "1px solid var(--border)",
         }}
       >
-        <Path textColor={"var(--notSelect)"} pathname={props.pathname} />
+        <Path textColor={"var(--notSelect)"} headColor={"var(--lightText)"} pathname={props.pathname} />
         {/* CONTENT */}
         <div
           className="frc mt30"
@@ -45,36 +46,55 @@ const ProfileHero = (props) => {
               width: 144,
               height: 144,
               borderRadius: 80,
-              overflow:"hidden",
+              overflow: "hidden",
               background: "#52BAD7",
               boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+              alignContent: "center",
             }}
           >
-            <img src={user.img} alt="profile" width={"100%"} 
-            // style={{
-            //   justifySelf:"center"
-            // }} 
+            <img
+              src={user.img}
+              alt="profile"
+              width={"100%"}
+              // style={{
+              //   justifySelf:"center"
+              // }}
             />
           </div>
           {/* DESCRIPTION */}
-          <div className="">
+          <div className="" style={{width:"fit-content"}}>
             {/* HEADING */}
-            <h2>{user.name}</h2>
+            <div className="frc">
+              <h2>{toCapitalise(user.name)}</h2>
+              <a
+                href={user.scholarUrl||"https://scholar.google.co.in/citations?user=vE66xpgAAAAJ&hl=en"}
+                className="bColor ml15 regu12"
+                style={{
+                  fontStyle: null,
+                  color: "var(--lightBlue)",
+                  opacity: 1,
+                  textDecoration: "underline",
+                  fontWeight: 500,
+                }}
+              >
+                Visit Google Scholar
+              </a>
+            </div>
             {/* POST */}
-            <div className="regu13 paraColor mt5">{user.post}</div>
+            <div className="regu13 paraColor mt5">{toCapitalise(user.post)}</div>
             {/* BLUE LINE */}
             <div
               className="blueLine mb20"
               style={{ width: 30, marginTop: 20 }}
             />
             {/* DETAILS */}
-            <div className="frc caps">
+            <div className="frfs caps">
               {user.details &&
                 Object.keys(user.details).map((item, i) => (
                   <div
                     key={item + i}
-                    style={{ marginRight: 40 }}
                     className="fcfs"
+                    style={{ marginRight: i=== Object.keys(user.details).length-1?0:40,width:"max-content",maxWidth:488 }}
                   >
                     <span
                       className="regu12 popi"
@@ -84,7 +104,7 @@ const ProfileHero = (props) => {
                     </span>
                     {typeof user.details[item] !== "object" ? (
                       <span className="medi14 inter hColor mt10">
-                        {user.details[item]}
+                        {String(user.details[item]).toLowerCase()}
                       </span>
                     ) : (
                       <div className="frc">

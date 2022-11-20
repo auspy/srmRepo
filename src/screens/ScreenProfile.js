@@ -28,22 +28,26 @@ const ScreenProfile = () => {
           redirect: "follow",
         });
         await res.json().then((data) => {
-          console.log(data.paper);
+          console.log(data.paper, "papers");
           console.log(data.message, "data.messageaa");
-          const edu = {
-            BTech: "IIT Mumbai",
-            MTech: "IIT Delhi",
-          };
+          // const edu = {
+          //   BTech: "IIT Mumbai",
+          //   MTech: "IIT Delhi",
+          // };
           const detials = {
             department: data.message?.department || "cse",
             papers: data.paper?.length || 56,
-            grade: "ultra pro max",
-            education: edu,
+            citations: 300,
+            "h-index": 56,
+            "i10-index": 40,
+            interests:data.message?.interest?.join(", ")
+            // education: edu,
           };
           const sendData = {
             name: data.message?.name,
             post: data.message?.post,
             img: data.message?.profilepic,
+            scholarUrl:data.message?.scholarurl,
             details: { ...detials },
           };
           // return sendData
@@ -77,7 +81,7 @@ const ScreenProfile = () => {
           user={userData}
         />
       </div>
-      <ProfileTabs active={activeTab} setActive={setActiveTab} tabs={tabs} />
+      {/* <ProfileTabs active={activeTab} setActive={setActiveTab} tabs={tabs} /> */}
       <ProfileBelowHero active={activeTab} element={elements[activeTab]} />
     </>
   );
@@ -116,38 +120,61 @@ const ProfileResearchPapers = (props) => {
     const paper = [];
     props.data?.forEach((item) => {
       paper.push({
-        date: item?.publishyear,
-        name: item?.tittle,
-        conference: item?.publication,
-        authors: item?.author,
-        href: item?.link,
+        date: item.publishyear,
+        name: item.tittle,
+        conference: item.publication,
+        authors: item.author,
+        href: item.link,
+        cited: item.cited,
       });
     });
     setData(paper);
   }, [props.data]);
 
   return (
-    <div
-      className={`${"fcfs"}`}
-      style={{
-        gap: 30,
-        flexWrap: "unset",
-      }}
-    >
-      {data?.map((item, i) => [
-        <Descrip
-          key={item.name + i}
-          date={item.date}
-          name={item.name}
-          conference={item.conference}
-          authors={item.authors}
-          href={item.href || "/"}
-        />,
+    <div className="fcfs">
+      {/* HEADING */}
+      <div
+        className="frcsb w100  upper regu11 popi mb20"
+        style={{ color: "var(--notSelect)" }}
+      >
+        {/* paper */}
         <div
-          key={item.name + new Date().getMilliseconds()}
-          className="lightLine"
-        />,
-      ])}
+          style={{
+            width: "85%",
+          }}
+        >
+          Title
+        </div>
+        {/* year */}
+        <div>Year</div>
+        {/* cited */}
+        <div>Cited By</div>
+      </div>
+      {/* PAPERS */}
+      <div
+        className={`${"fcfs"}`}
+        style={{
+          gap: 30,
+          flexWrap: "unset",
+        }}
+      >
+        {data?.map((item, i) => [
+          <Descrip
+            key={item.name + i}
+            date={item.date}
+            name={item.name}
+            cited={item.cited}
+            conference={item.conference}
+            authors={item.authors}
+            href={item.href || "/"}
+          />,
+          <div
+            key={item.name + new Date().getMilliseconds()}
+            className="lightLine"
+          />,
+        ])}
+      </div>
     </div>
   );
 };

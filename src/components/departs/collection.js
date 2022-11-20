@@ -1,10 +1,15 @@
 // import styles from "../../static/css/department.module.css";
 import { createRef, useEffect, useRef, useState } from "react";
+import paths from "../../paths";
 import { DepartItem } from "../../screens/ScreenHome";
 
 export const Collection = () => {
   const [interest, setInterest] = useState({ items: [], id: {} });
-  collectionData["Area Of Interest"] = { items: interest.items, desc: "", id: interest.id };
+  collectionData["Area Of Interest"] = {
+    items: interest.items,
+    desc: "",
+    id: interest.id,
+  };
   const callaboutPage = async () => {
     try {
       const url = "http://127.0.0.1:7780" + `/interest`;
@@ -170,10 +175,9 @@ export const Collection = () => {
                     key={item + i}
                     info={{
                       ...item,
-                      href:
-                        item ,
-                        // + item === "Area Of Interest" ?
-                        // `?id=${collectionData[item].id[item]}`:"",
+                      href: paths.collectionList(item, "", key),
+                      // + item === "Area Of Interest" ?
+                      // `?id=${collectionData[item].id[item]}`:"",
                       name: item,
                     }}
                     small={true}
@@ -346,20 +350,20 @@ const collectionData = {
     items: departItems && Object.keys(departItems),
     desc: "",
   },
-  Author: { items: departItems && Object.keys(departItems), desc: "" },
-  Teacher: { items: departItems && Object.keys(departItems), desc: "" },
-  Student: { items: departItems && Object.keys(departItems), desc: "" },
+  // Author: { items: departItems && Object.keys(departItems), desc: "" },
+  // Teacher: { items: departItems && Object.keys(departItems), desc: "" },
+  // Student: { items: departItems && Object.keys(departItems), desc: "" },
   Year: {
     items: [
-      "1940-50",
-      "1950-60",
-      "1960-70",
-      "1970-80",
-      "1980-90",
-      "1990-2000",
-      "2000-10",
-      "2010-20",
-      "2020-30",
+      "1940-1949",
+      "1950-1959",
+      "1960-1969",
+      "1970-1979",
+      "1980-1989",
+      "1990-2099",
+      "2000-2009",
+      "2010-2019",
+      "2020-2029",
     ],
     desc: "",
   },
@@ -372,7 +376,7 @@ const collectionData = {
       "Compiler Design",
     ],
     desc: "",
-    id:{},
+    id: {},
   },
 };
 export const collections = Object.keys(collectionData);

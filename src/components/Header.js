@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import paths from "../paths";
 import IconProfile from "../static/icons/IconProfile";
-import IconSearch from "../static/icons/IconSearch";
 
 const Header = () => {
   const { pathname } = useLocation();
@@ -92,7 +91,7 @@ const menuItems = [
   { name: "Visit SRM Website", href: "https://srmuniversity.ac.in/" },
 ];
 const icons = [
-  <IconSearch />,
+  // <IconSearch />,
   <Link to={"/Login"} className="frc">
     <IconProfile />
   </Link>,
