@@ -65,7 +65,7 @@ const ProfileHero = (props) => {
           <div className="" style={{width:"fit-content"}}>
             {/* HEADING */}
             <div className="frc">
-              <h2>{toCapitalise(user.name)}</h2>
+              <h2>{toCapitalise(user?.name)}</h2>
               <a
                 href={user.scholarUrl||"https://scholar.google.co.in/citations?user=vE66xpgAAAAJ&hl=en"}
                 className="bColor ml15 regu12"
@@ -81,7 +81,7 @@ const ProfileHero = (props) => {
               </a>
             </div>
             {/* POST */}
-            <div className="regu13 paraColor mt5">{toCapitalise(user.post)}</div>
+            <div className="regu13 paraColor mt5">{toCapitalise(user?.post)}</div>
             {/* BLUE LINE */}
             <div
               className="blueLine mb20"

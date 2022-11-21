@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { AlphaFilter, Path } from "../../screens/ScreenLists";
+import { 
+  // AlphaFilter,
+   Path } from "../../screens/ScreenLists";
 // import styles from "../../static/css/front.module.css";
-import SearchBar from "../common/SearchBar";
+// import SearchBar from "../common/SearchBar";
 
 // export const Front2 = (props) => {
 //   return (
@@ -69,11 +71,11 @@ const Front = (props) => {
               <h1>Discover</h1>
             </div>
             {/* SEARCH BAR */}
-            <div className="mt30">
+            {/* <div className="mt30">
               <SearchBar height={50} width={489} />
-            </div>
+            </div> */}
             {/* FILTER SHORTCUTS */}
-            <AlphaFilter filter={filter} setFilter={setFilter} />
+            {/* <AlphaFilter filter={filter} setFilter={setFilter} /> */}
           </div>
           {/* RIGHT SIDE */}
           {/* IMAGE */}

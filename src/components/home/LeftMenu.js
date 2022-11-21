@@ -43,7 +43,7 @@ const LeftMenu = () => {
             <span className="regu12 caps mb5 frc">
               Explore research papers by srm university
             </span>
-            <SearchBar />
+            {/* <SearchBar /> */}
           </div>
         </div>
         {/* top seached links */}
@@ -79,10 +79,10 @@ export default LeftMenu;
 // 7 links
 export const topLinks = [
   { name: "Authors in computer science", href: paths.collectionList("Computer Science","Authors") },
-  { name: "Test1", href: paths.collectionList("Test1") },
+  { name: "Maths", href: paths.collectionList("Maths") },
   { name: "Computer Science", href: paths.collectionList("Computer Science") },
   { name: "Law", href: paths.collectionList("Law") },
   { name: "Compiler Design", href: paths.collectionList("Compiler Design") },
-  { name: "Link name", href: "/" },
-  { name: "Link name", href: "/" },
+  // { name: "Link name", href: "/" },
+  // { name: "Link name", href: "/" },
 ];

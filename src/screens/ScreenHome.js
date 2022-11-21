@@ -40,12 +40,42 @@ export default Home;
 // 6 items only
 
 const departments = [
-  { img: "", name: "Computer Science is getting tested", docs: 109, href: "/" },
-  { img: "", name: "Computer Science", docs: 109, href: "/" },
-  { img: "", name: "Computer Science", docs: 109, href: "/" },
-  { img: "", name: "Computer Science", docs: 109, href: "/" },
-  { img: "", name: "Computer Science", docs: 109, href: "/" },
-  { img: "", name: "Computer Science", docs: 109, href: "/" },
+  {
+    img: "",
+    name: "Maths",
+    docs: 109,
+    href: paths.collectionList("Maths", "Research Papers"),
+  },
+  {
+    img: "",
+    name: "Chemistry",
+    docs: 109,
+    href: paths.collectionList("Chemistry", "Research Papers"),
+  },
+  {
+    img: "",
+    name: "Civil",
+    docs: 109,
+    href: paths.collectionList("Civil", "Research Papers"),
+  },
+  {
+    img: "",
+    name: "Electrical",
+    docs: 109,
+    href: paths.collectionList("Electrical", "Research Papers"),
+  },
+  {
+    img: "",
+    name: "Hotel Management",
+    docs: 109,
+    href: paths.collectionList("Hotel Management", "Research Papers"),
+  },
+  {
+    img: "",
+    name: "Physics",
+    docs: 109,
+    href: paths.collectionList("Physics", "Research Papers"),
+  },
 ];
 
 const Departments = () => {
@@ -167,7 +197,9 @@ export const DepartItem = (props) => {
             className={` ${props.small ? "regu14 mediP" : "regu16 popi"}  caps`}
             style={{ textAlign: "center" }}
             to={props.info?.href}
-            onClick={()=>{console.log(props.info?.href);}}
+            onClick={() => {
+              console.log(props.info?.href);
+            }}
           >
             {props.info?.name?.toLowerCase() || "Development Name"}
           </Link>
@@ -471,7 +503,12 @@ const TopContriItem = (props) => {
 // PDF VIEW ELEMENTS
 
 const PdfView = () => {
-  const pdf = [
+  const imgs = [
+    require("../static/images/pdf.png"),
+    require("../static/images/pdf2.png"),
+    require("../static/images/pdf3.png"),
+  ];
+  const [pdf, setPdf] = useState([
     {
       name: "Non-preemptive Scheduling",
       img: require("../static/images/pdf.png"),
@@ -492,7 +529,48 @@ const PdfView = () => {
       conference: "Mathematics",
       author: ["Cowan", "Nicolas B.", "Agol", "Eric"],
     },
-  ];
+  ]);
+  const callaboutPage = async () => {
+    try {
+      // console.log(type, departName, "inside");
+      // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
+      const url = "http://127.0.0.1:7780" + `/highpaper`;
+
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        redirect: "follow",
+      });
+
+      const data = await res.json();
+      const dataa = data.message;
+      console.log(dataa, "high papers");
+      const arr = [];
+      dataa?.forEach((item, i) => {
+        arr.push({
+          name: item.tittle,
+          author: item.author,
+          cited: item.cited,
+          href: item.link,
+          conference: item.publication,
+          date: item.publishyear,
+          img: imgs[i],
+        });
+      });
+      setPdf(arr);
+
+      if (!res.status === 200) {
+        console.log("Errr");
+      }
+    } catch (e) {}
+  };
+  useEffect(() => {
+    // console.log(type, "type");
+    callaboutPage();
+  }, []);
 
   const bgBoxesStyle = {
     position: "relative",
@@ -595,16 +673,20 @@ const PdfView = () => {
           {/* DESCRIPTION */}
 
           <div style={{ width: 775, alignSelf: "center" }}>
+            {/* pages */}
             <Descrip
               conference={pdf[img]?.conference}
               name={pdf[img]?.name}
               author={pdf[img]?.author}
-              href={"/"}
+              href={pdf[img]?.href}
+              date={pdf[img]?.date}
+              cited={pdf[img]?.cited}
             />
           </div>
           {/* BULLETS */}
           <div className="gcc mt30">
             <div className="frc">
+              {/* left arrow */}
               <button
                 className="mr10"
                 onClick={() => {
@@ -618,6 +700,7 @@ const PdfView = () => {
                 {/* <IconArrowDown /> */}
                 <div className="regu16 frc notSelectColor popi">{"<"}</div>
               </button>
+              {/* bullets */}
               {pdf?.map((item, i) => (
                 <button
                   onClick={() => {
@@ -634,6 +717,7 @@ const PdfView = () => {
                   }}
                 />
               ))}
+              {/* right arrow */}
               <button
                 className="ml10"
                 onClick={() => {

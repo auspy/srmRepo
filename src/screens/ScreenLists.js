@@ -16,6 +16,7 @@ const ScreenLists = () => {
 
   const { pathname } = useLocation();
   const pathArr = pathname.split("/");
+  const searchResults = pathname.match("SearchResults");
   const [departName, setDepartName] = useState(
     pathArr[pathArr.length - 1].replaceAll("%20", " ")
   ); //getting department name from path
@@ -37,11 +38,11 @@ const ScreenLists = () => {
       // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
       const url =
         "http://127.0.0.1:7780" +
-        `/department?id=${departName}&departType=${
-          searchParams.get("departType") || "nice"
-        }`;
-
-      const res = await fetch(url, {
+        `/department?id=${departName}&departType=${searchParams.get("departType") || "nice"}`;
+      const searchUrl =
+        "http://127.0.0.1:7780" +
+        `/different?departType=${searchParams.get("departType")}&id=${departName}&p=${searchParams.get("search")}`;
+      const res = await fetch(searchResults ? searchUrl : url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const ScreenLists = () => {
       const data = await res.json();
       const msg = data.message;
       const papers = data.allpaper;
-      console.log(data, "wowo");
+      // console.log(data, "wowo");
 
       setPapersData(papers || []); //research appers
       setPapersData2(msg); //authors
@@ -68,9 +69,9 @@ const ScreenLists = () => {
     } catch (e) {}
   };
   useEffect(() => {
-    // console.log(type, "type");
+    console.log(searchResults, "searchresults");
     callaboutPage(type);
-  }, []);
+  }, [pathname]);
   // data recieved
   // send to belowhero
   // console.log(
@@ -239,7 +240,7 @@ export const AlphaFilter = (props) => {
     "z",
   ];
   return (
-    <div className="mt10 frc  " style={{ color: "white",gap:13.5 }}>
+    <div className="mt10 frc  " style={{ color: "white", gap: 13.5 }}>
       {filterArr?.map((item, i) => (
         <button
           key={item + i}
@@ -346,25 +347,27 @@ const BelowHero = (props) => {
           }}
         >
           {/* HEADING */}
-          {props.type === "Research Papers" && (
-            <div
-              className="frcsb w100  upper regu11 popi"
-              style={{ color: "var(--notSelect)" }}
-            >
-              {/* paper */}
+          {data &&
+            data[props.type].length > 0 &&
+            props.type === "Research Papers" && (
               <div
-                style={{
-                  width: "85%",
-                }}
+                className="frcsb w100  upper regu11 popi"
+                style={{ color: "var(--notSelect)" }}
               >
-                Title
+                {/* paper */}
+                <div
+                  style={{
+                    width: "85%",
+                  }}
+                >
+                  Title
+                </div>
+                {/* year */}
+                <div>Year</div>
+                {/* cited */}
+                <div>Cited By</div>
               </div>
-              {/* year */}
-              <div>Year</div>
-              {/* cited */}
-              <div>Cited By</div>
-            </div>
-          )}
+            )}
           {/* PAPERS */}
           {data &&
             data[props.type]?.map((item, i) => [

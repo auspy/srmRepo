@@ -13,8 +13,17 @@ export const Collection = () => {
   const callaboutPage = async () => {
     try {
       const url = "http://127.0.0.1:7780" + `/interest`;
+      const url2 = "http://127.0.0.1:7780" + `/alldepartment`;
 
       const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        redirect: "follow",
+      });
+      const res2 = await fetch(url2, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +34,8 @@ export const Collection = () => {
 
       const data = await res.json();
       const msg = data.message;
-      console.log(msg);
+      const data2 = await res2.json();
+      console.log(msg,data2,"nice");
       const arr = [];
       const ids = {};
       msg.forEach((item) => {
