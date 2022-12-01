@@ -83,6 +83,4 @@ export const topLinks = [
   { name: "Computer Science", href: paths.collectionList("Computer Science") },
   { name: "Law", href: paths.collectionList("Law") },
   { name: "Compiler Design", href: paths.collectionList("Compiler Design") },
-  // { name: "Link name", href: "/" },
-  // { name: "Link name", href: "/" },
 ];

@@ -37,9 +37,9 @@ const ScreenProfile = () => {
           const detials = {
             department: data.message?.department || "cse",
             papers: data.paper?.length || 56,
-            citations: 300,
-            "h-index": 56,
-            "i10-index": 40,
+            citations: data.message?.table?.citations,
+            "h-index": data.message?.table?.h_index,
+            "i10-index": data.message?.table?.i10_index,
             interests:data.message?.interest?.join(", ")
             // education: edu,
           };
