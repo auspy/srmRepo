@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { urlAws } from "../common";
 import SideBox from "../components/common/SideBox";
 import Descrip from "../components/home/Descrip";
 import ProfileHero from "../components/Profile/ProfileHero";
@@ -16,7 +17,7 @@ const ScreenProfile = () => {
     const callaboutPage = async () => {
       try {
         const url =
-          "http://127.0.0.1:7780" +
+          urlAws +
           `/authordetail?id=${searchParams.get("id")}`;
 
         const res = await fetch(url, {

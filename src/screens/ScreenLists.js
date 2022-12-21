@@ -6,7 +6,7 @@ import Descrip from "../components/home/Descrip";
 import IconArrowDown from "../static/icons/IconArrowDown";
 import { useSearchParams } from "react-router-dom";
 import ProfileBox from "../components/departs/ProfileBox";
-import { toCapitalise } from "../common";
+import { toCapitalise, urlAws } from "../common";
 
 const ScreenLists = () => {
   const [searchParams] = useSearchParams();
@@ -35,12 +35,12 @@ const ScreenLists = () => {
   const callaboutPage = async () => {
     try {
       // console.log(type, departName, "inside");
-      // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
+      // const url = urlAws + `/department?id=${departName}&type=${type}`;
       const url =
-        "http://127.0.0.1:7780" +
+        urlAws +
         `/department?id=${departName}&departType=${searchParams.get("departType") || "nice"}`;
       const searchUrl =
-        "http://127.0.0.1:7780" +
+        urlAws +
         `/different?departType=${searchParams.get("departType")}&id=${departName}&p=${searchParams.get("search")}`;
       const res = await fetch(searchResults ? searchUrl : url, {
         method: "GET",

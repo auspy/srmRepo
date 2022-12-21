@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { urlAws } from "../common";
 import Descrip from "../components/home/Descrip";
 import LeftMenu from "../components/home/LeftMenu";
 import paths from "../paths";
@@ -363,7 +364,7 @@ const TopContri = () => {
 
   useEffect(() => {
     const test = async () => {
-      const urlcitation = "http://127.0.0.1:7780" + "/citation";
+      const urlcitation = urlAws + "/citation";
 
       const res = await fetch(urlcitation, {
         method: "GET",
@@ -533,8 +534,8 @@ const PdfView = () => {
   const callaboutPage = async () => {
     try {
       // console.log(type, departName, "inside");
-      // const url = "http://127.0.0.1:7780" + `/department?id=${departName}&type=${type}`;
-      const url = "http://127.0.0.1:7780" + `/highpaper`;
+      // const url = urlAws + `/department?id=${departName}&type=${type}`;
+      const url = urlAws + `/highpaper`;
 
       const res = await fetch(url, {
         method: "GET",

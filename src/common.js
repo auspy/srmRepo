@@ -7,3 +7,10 @@ export const toCapitalise = (item) => {
       })
       .join(" ");
   };
+
+// VARAIBLES
+const url = "http://localhost:7780"
+const aws = "http://3.113.25.64:7780"
+export const urlAws = aws
+
+// ||"3.113.25.64:7780"

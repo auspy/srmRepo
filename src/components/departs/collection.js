@@ -1,5 +1,6 @@
 // import styles from "../../static/css/department.module.css";
 import { createRef, useEffect, useRef, useState } from "react";
+import { urlAws } from "../../common";
 import paths from "../../paths";
 import { DepartItem } from "../../screens/ScreenHome";
 
@@ -12,8 +13,8 @@ export const Collection = () => {
   };
   const callaboutPage = async () => {
     try {
-      const url = "http://127.0.0.1:7780" + `/interest`;
-      const url2 = "http://127.0.0.1:7780" + `/alldepartment`;
+      const url = urlAws + `/interest`;
+      const url2 = urlAws + `/alldepartment`;
 
       const res = await fetch(url, {
         method: "GET",
