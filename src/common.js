@@ -12,5 +12,3 @@ export const toCapitalise = (item) => {
 const url = "http://localhost:7780"
 const aws = "http://3.113.25.64:7780"
 export const urlAws = aws
-
-// ||"3.113.25.64:7780"
