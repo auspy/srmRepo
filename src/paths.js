@@ -1,6 +1,6 @@
 const paths = {
   collections: (sort) => (sort ? "/Collections?sort=" + sort : "/Collections"),
-  collectionList: (collection, type="", departType = "departments") =>
+  collectionList: (collection, type = "", departType = "departments") =>
     "/Collections/" +
     collection +
     (type
@@ -8,9 +8,12 @@ const paths = {
       : departType
       ? "?departType=" + departType
       : ""),
-  profile: (collection, name, id) => {
-    // console.log(collection,name,id);
-    return `/Collections/${collection}/${id}`;
+  profile: (department, name, id) => {
+    // console.log(department,name,id);
+    if (department && name && id) {
+      return `/Collections/${department}/${name}?id=${id}`;
+    }
+    return null;
   },
 };
 export default paths;

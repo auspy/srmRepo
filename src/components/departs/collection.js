@@ -366,8 +366,6 @@ const collectionData = {
   // Student: { items: departItems && Object.keys(departItems), desc: "" },
   Year: {
     items: [
-      "1940-1949",
-      "1950-1959",
       "1960-1969",
       "1970-1979",
       "1980-1989",

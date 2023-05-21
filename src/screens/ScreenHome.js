@@ -204,9 +204,9 @@ export const DepartItem = (props) => {
           >
             {props.info?.name?.toLowerCase() || "Development Name"}
           </Link>
-          <span className="light13 caps notSelectColor mt10">
+          {/* <span className="light13 caps notSelectColor mt10">
             {props.info?.docs || "99"} Researches
-          </span>
+          </span> */}
           {/* </div> */}
         </div>
       </div>

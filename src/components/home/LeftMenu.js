@@ -81,6 +81,5 @@ export const topLinks = [
   { name: "Authors in computer science", href: paths.collectionList("Computer Science","Authors") },
   { name: "Maths", href: paths.collectionList("Maths") },
   { name: "Computer Science", href: paths.collectionList("Computer Science") },
-  { name: "Law", href: paths.collectionList("Law") },
-  { name: "Compiler Design", href: paths.collectionList("Compiler Design") },
+  { name: "Dr.Puneet Goswami", href: paths.profile("COMPUTER SCIENCE","Dr.Puneet Goswami","63bfb2309c0ddf5c34a41676") },
 ];

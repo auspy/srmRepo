@@ -67,7 +67,7 @@ const Front = (props) => {
             {/* PATH */}
             <Path pathname={props.pathname} />
             {/* HEADING */}
-            <div className="frc mt60 caps" style={{ gap: 15 }}>
+            <div className="frc caps" style={{ height:"80%",justifyContent:"center" }}>
               <h1>Discover</h1>
             </div>
             {/* SEARCH BAR */}
